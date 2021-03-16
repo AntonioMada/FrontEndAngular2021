@@ -1,0 +1,10 @@
+<h1>
+  <nav>
+    <a routerLink="/home">{{title}}</a>
+  </nav>
+</h1>
+<mat-slide-toggle (click)="login()">Log me!</mat-slide-toggle>
+<button mat-stroked-button color="primary" (click)="peuplerBD()">PeuplerBD</button>
+
+<!-- Indique qu'on affichera le composant qui correspond à l'URL courant -->
+<router-outlet></router-outlet>

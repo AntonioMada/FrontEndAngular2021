@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ajouterBtn {
+  align-self: flex-end;
+}
+
+.example-viewport {
+  height: 600px;
+  width: 600px;
+  border: 1px solid black;
+}
+
+.example-item {
+  height: 50px;
+}
