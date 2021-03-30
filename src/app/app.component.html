@@ -3,6 +3,10 @@
     <a routerLink="/home">{{title}}</a>
   </nav>
 </h1>
+
+<app-nav *ngif="showMenu"></app-nav>
+
+<button mat-stroked-button color="primary" (click)="disconnect()">Deconnecter</button>
 <mat-slide-toggle (click)="login()">Log me!</mat-slide-toggle>
 <button mat-stroked-button color="primary" (click)="peuplerBD()">PeuplerBD</button>
 

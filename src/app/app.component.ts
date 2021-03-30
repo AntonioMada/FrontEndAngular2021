@@ -29,7 +29,10 @@ export class AppComponent {
       this.authService.logIn("admin", "toto");
     }
   }
-
+  disconnect() {
+        console.log("deconnecté");
+        this.router.navigate(["/login"]);
+  }
   peuplerBD() {
     // version naive et simple
     //this.assignmentsService.peuplerBD();

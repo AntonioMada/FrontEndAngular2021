@@ -16,11 +16,19 @@
             <mat-divider></mat-divider>
 
             <p *ngIf="a.rendu; else nonsoumis" appRendu>
+              id matiere {{a.id_matiere}} 
+              auteur 
+              note {{a.note}} 
+              remarques: {{a.remarques}}
               {{a.nom}}, rendu par l'élève.
             </p>
             <ng-template #nonsoumis>
               <p appNonRendu>
-                {{a.nom}}, non encore rendu par l'élève.
+                id matiere {{a.id_matiere}} 
+                auteur 
+                note {{a.note}} 
+                remarques: {{a.remarques}}
+                {{a.nom}} , non encore rendu par l'élève.
               </p>
             </ng-template>
 
@@ -29,4 +37,21 @@
       </nav>
     </mat-list>
   </cdk-virtual-scroll-viewport>
+
 </main>
+  <!-- <div class="col-md-3 mx-auto my-5" *ngFor="let a of assignments">
+
+  <mat-card class="card-shiba" >
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>{{a.nom}}</mat-card-title>
+      <mat-card-subtitle>{{a.dateDeRendu}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>{{a.auteur }} {{a.id_matiere}} {{a.auteur}} {{a.note}} {{a.remarques}}
+      </p>
+    </mat-card-content>
+
+  </mat-card>
+  </div> -->

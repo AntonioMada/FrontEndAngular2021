@@ -26,6 +26,7 @@ import { EditAssigmentComponent } from './assignments/edit-assigment/edit-assigm
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { UserComponent } from './user/user.component';
 
 const routes:Routes = [
   {
@@ -46,11 +47,14 @@ const routes:Routes = [
   {
     path:"assignment/:id",
     component:AssignmentDetailComponent
+  },  
+  {
+    path:"assignment/:id",
+    component:AssignmentDetailComponent
   },
   {
-    path:"assignment/:id/edit",
-    component:EditAssigmentComponent,
-    canActivate : [AuthGuard]
+    path:"login",
+    component:UserComponent
   }
 ]
 @NgModule({
@@ -61,7 +65,8 @@ const routes:Routes = [
     NonRenduDirective,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssigmentComponent
+    EditAssigmentComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
