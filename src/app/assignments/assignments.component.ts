@@ -57,6 +57,7 @@ export class AssignmentsComponent implements OnInit {
         this.prevPage = data.prevPage;
         this.hasNextPage = data.hasNextPage;
         this.nextPage = data.nextPage;
+        console.log(this);
         console.log("données reçues");
       });
   }

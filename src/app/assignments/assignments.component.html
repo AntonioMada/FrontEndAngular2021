@@ -7,37 +7,166 @@
   <h1>Liste des assignments (scrolling infini)</h1>
   <mat-divider></mat-divider>
   
-  <cdk-virtual-scroll-viewport #scroller itemSize="50" class="example-viewport" class="example-viewport">
-    <mat-list *cdkVirtualFor="let a of assignments">
-      <nav>
-        <a routerLink="/assignment/{{a.id}}">
-          <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
-          <mat-list-item class="example-item">
-            <mat-divider></mat-divider>
+  <div layout="row">
+    
+    <!-- <cdk-virtual-scroll-viewport #scroller itemSize="150" class="example-viewport">
+      <mat-divider></mat-divider>
+      <mat-list *cdkVirtualFor="let a of assignments">
+        <nav>
+          <a routerLink="/assignment/{{a.id}}">
+            <mat-list-item class="example-item">
+  
+              <div *ngIf="a.rendu; else nonsoumis" appRendu class="card-container">
+                <mat-card class="rendu-card">
+                  <mat-card-title>Rendu</mat-card-title>
+                  <mat-card-content>
+                    <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+                    <mat-list>
+                      <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
+                      <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
+                      <mat-list-item>Note : {{a.note}} </mat-list-item>
+                      <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
+                      <mat-list-item>Matière : {{a.nom}}</mat-list-item>
 
-            <p *ngIf="a.rendu; else nonsoumis" appRendu>
-              id matiere {{a.id_matiere}} 
-              auteur 
-              note {{a.note}} 
-              remarques: {{a.remarques}}
-              {{a.nom}}, rendu par l'élèveee.
-            </p>
-            <ng-template #nonsoumis>
-              <p appNonRendu>
-                id matiere {{a.id_matiere}} 
-                auteur 
-                note {{a.note}} 
-                remarques: {{a.remarques}}
-                {{a.nom}} , non encore rendu par l'élèveeee.
-              </p>
-            </ng-template>
+                    </mat-list>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+              <ng-template #nonsoumis>
+                <div appNonRendu class="card-container">
+                  <mat-card>
+                    <mat-card-title>Non rendu</mat-card-title>
+  
+                    <mat-card-content>
+                      <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
 
-          </mat-list-item>
-        </a>
-      </nav>
-    </mat-list>
-  </cdk-virtual-scroll-viewport>
+                      <mat-list>
+                        <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
+                        <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
+                        <mat-list-item>Note : {{a.note}} </mat-list-item>
+                        <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
+                        <mat-list-item>Matière : {{a.nom}}</mat-list-item>
+                      </mat-list>
+                    </mat-card-content>
+                  </mat-card>
+  
+                </div>
+              </ng-template>
+  
+            </mat-list-item>
+          </a>
+        </nav>
+      </mat-list>
+    </cdk-virtual-scroll-viewport> -->
+    <mat-grid-list cols="2" rowHeight="600px">
+      <mat-grid-tile>
+        <cdk-virtual-scroll-viewport #scroller itemSize="150" class="example-viewport">
+          <mat-divider></mat-divider>
+          <mat-list *cdkVirtualFor="let a of assignments">
+            <nav>
+              <a routerLink="/assignment/{{a.id}}">
+                <mat-list-item class="example-item">
+      
+                  <div *ngIf="a.rendu; else nonsoumis" appRendu class="card-container">
+                    <mat-card class="rendu-card">
+                      <mat-card-title>Rendu</mat-card-title>
+                      <mat-card-content>
+                        <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+                        <mat-list>
+                          <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
+                          <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
+                          <mat-list-item>Note : {{a.note}} </mat-list-item>
+                          <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
+                          <mat-list-item>Matière : {{a.nom}}</mat-list-item>
+    
+                        </mat-list>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <!-- <ng-template #nonsoumis>
+                    <div appNonRendu class="card-container">
+                      <mat-card>
+                        <mat-card-title>Non rendu</mat-card-title>
+      
+                        <mat-card-content>
+                          <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+    
+                          <mat-list>
+                            <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
+                            <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
+                            <mat-list-item>Note : {{a.note}} </mat-list-item>
+                            <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
+                            <mat-list-item>Matière : {{a.nom}}</mat-list-item>
+                          </mat-list>
+                        </mat-card-content>
+                      </mat-card>
+      
+                    </div>
+                  </ng-template> -->
+      
+                </mat-list-item>
+              </a>
+            </nav>
+          </mat-list>
+        </cdk-virtual-scroll-viewport>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <cdk-virtual-scroll-viewport #scroller itemSize="150" class="example-viewport">
+          <mat-divider></mat-divider>
+          <mat-list *cdkVirtualFor="let a of assignments">
+            <nav>
+              <a routerLink="/assignment/{{a.id}}">
+                <mat-list-item class="example-item">
+      
+                  <!-- <div *ngIf="a.rendu; else nonsoumis" appRendu class="card-container">
+                    <mat-card class="rendu-card">
+                      <mat-card-title>Rendu</mat-card-title>
+                      <mat-card-content>
+                        <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+                        <mat-list>
+                          <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
+                          <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
+                          <mat-list-item>Note : {{a.note}} </mat-list-item>
+                          <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
+                          <mat-list-item>Matière : {{a.nom}}</mat-list-item>
+    
+                        </mat-list>
+                      </mat-card-content>
+                    </mat-card>
+                  </div> -->
+                  <ng-template #nonsoumis>
+                    <div appNonRendu class="card-container">
+                      <mat-card>
+                        <mat-card-title>Non rendu</mat-card-title>
+      
+                        <mat-card-content>
+                          <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+    
+                          <mat-list>
+                            <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
+                            <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
+                            <mat-list-item>Note : {{a.note}} </mat-list-item>
+                            <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
+                            <mat-list-item>Matière : {{a.nom}}</mat-list-item>
+                          </mat-list>
+                        </mat-card-content>
+                      </mat-card>
+      
+                    </div>
+                  </ng-template>
+      
+                </mat-list-item>
+              </a>
+            </nav>
+          </mat-list>
+        </cdk-virtual-scroll-viewport>
+      </mat-grid-tile>
+      <mat-grid-tile>3</mat-grid-tile>
+      <mat-grid-tile>4</mat-grid-tile>
+    </mat-grid-list>
 
+  </div>
+  
 </main>
   <!-- <div class="col-md-3 mx-auto my-5" *ngFor="let a of assignments">
 
