@@ -98,7 +98,7 @@
               <a routerLink="/assignment/{{a.id}}">
                 <mat-list-item class="example-item">
       
-                  <div *ngIf="a.rendu; else nonsoumis" appNonRendu class="card-container">
+                  <div *ngIf="a.rendu==false; else nonsoumis" appNonRendu class="card-container">
                     <mat-card class="rendu-card">
                       <mat-card-title>Non Rendu</mat-card-title>
                       <mat-card-content>
