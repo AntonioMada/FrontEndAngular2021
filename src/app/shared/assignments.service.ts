@@ -17,10 +17,12 @@ export class AssignmentsService {
     private http: HttpClient
   ) {}
 
-  uri = "http://localhost:8010/api/assignments";
-  uri_rendu = "http://localhost:8010/api/rendu"
-  uri_nonrendu = "http://localhost:8010/api/nonrendu"
-  //uri = "https://backend2021.herokuapp.com/api/assignments"
+  // uri = "http://localhost:8010/api/assignments";
+  // uri_rendu = "http://localhost:8010/api/rendu"
+  // uri_nonrendu = "http://localhost:8010/api/nonrendu"
+  uri = "https://backend2021.herokuapp.com/api/assignments"
+  uri_rendu = "https://backend2021.herokuapp.com/api/rendu"
+  uri_nonrendu = "https://backend2021.herokuapp.com/api/nonrendu"
 
   getAssignments(): Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...");
