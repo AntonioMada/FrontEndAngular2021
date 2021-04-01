@@ -142,7 +142,29 @@ export class AssignmentsComponent implements OnInit {
         console.log("données reçues dans les assignments pour scrolling");
       });
   }
+  getPlusDAssignmentsNonPourScrolling() {
+    this.assignmentsService
+      .getAssignmentsNonRendu(this.page.nonrendu, this.limit.nonrendu)
+      .subscribe((data) => {
+        console.log("données reçues dans les assigments pour scrolling");
 
+        console.log(data);
+        // au lieu de remplacer this.assignments par les nouveaux assignments récupérés
+        // on va les ajouter à ceux déjà présents...
+        this.assignmentsnonrendu = this.assignmentsnonrendu.concat(data.docs);
+        // this.assignments = [...this.assignments, ...data.docs];
+        this.page.nonrendu = data.page;
+        this.limit.nonrendu = data.limit;
+        this.totalDocs.nonrendu = data.totalDocs;
+        this.totalPages.nonrendu = data.totalPages;
+        this.hasPrevPage.nonrendu = data.hasPrevPage;
+        this.prevPage.nonrendu = data.prevPage;
+        this.hasNextPage.nonrendu = data.hasNextPage;
+        this.nextPage.nonrendu = data.nextPage;
+        console.log(this.assignmentsnonrendu);
+        console.log("données reçues dans les assignments pour scrolling");
+      });
+  }
   ngAfterViewInit() {
     // Appelé automatiquement après l'affichage, donc l'élément scroller aura
     // et affiché et ne vaudra pas "undefined" (ce qui aurait été le cas dans ngOnInit)
@@ -179,6 +201,41 @@ export class AssignmentsComponent implements OnInit {
               "Je charge de nouveaux assignments page = " + this.page.rendu
             );
             this.getPlusDAssignmentsPourScrolling();
+          }
+        });
+      });
+
+      this.scrollernonrendu
+      .elementScrolled()
+      .pipe(
+        map((event) => {
+          return this.scrollernonrendu.measureScrollOffset("bottom");
+        }),
+        pairwise(),
+        /*
+        tap(([y1, y2]) => {
+          if(y2 < y1) {
+            console.log("ON SCROLLE VERS LE BAS !")
+          } else {
+            console.log("ON SCROLLE VERS LE HAUT !")
+          }
+        }),
+        */
+        filter(([y1, y2]) => y2 < y1 && y2 < 200),
+        throttleTime(200) // on ne va en fait envoyer le dernier événement que toutes les 200ms.
+        // on va ignorer tous les évéments arrivés et ne garder que le dernier toutes
+        // les 200ms
+      )
+      .subscribe((dist) => {
+        this.ngZone.run(() => {
+          console.log("tonga eto scroll non");
+          console.log(this.hasNextPage.nonrendu)
+          if (this.hasNextPage.nonrendu) {
+            this.page.nonrendu = this.nextPage.nonrendu;
+            console.log(
+              "Je charge de nouveaux assignments page = " + this.page.nonrendu
+            );
+            this.getPlusDAssignmentsNonPourScrolling();
           }
         });
       });
