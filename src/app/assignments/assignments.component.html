@@ -60,14 +60,14 @@
     </cdk-virtual-scroll-viewport> -->
     <mat-grid-list cols="2" rowHeight="600px">
       <mat-grid-tile>
-        <cdk-virtual-scroll-viewport #scroller itemSize="150" class="example-viewport">
+        <cdk-virtual-scroll-viewport #scrollerrendu itemSize="150" class="example-viewport">
           <mat-divider></mat-divider>
-          <mat-list *cdkVirtualFor="let a of assignments">
+          <mat-list *cdkVirtualFor="let a of assignmentsrendu">
             <nav>
               <a routerLink="/assignment/{{a.id}}">
                 <mat-list-item class="example-item">
       
-                  <div *ngIf="a.rendu; else nonsoumis" appRendu class="card-container">
+                  <div *ngIf="a.rendu" appRendu class="card-container">
                     <mat-card class="rendu-card">
                       <mat-card-title>Rendu</mat-card-title>
                       <mat-card-content>
@@ -83,26 +83,6 @@
                       </mat-card-content>
                     </mat-card>
                   </div>
-                  <!-- <ng-template #nonsoumis>
-                    <div appNonRendu class="card-container">
-                      <mat-card>
-                        <mat-card-title>Non rendu</mat-card-title>
-      
-                        <mat-card-content>
-                          <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
-    
-                          <mat-list>
-                            <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
-                            <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
-                            <mat-list-item>Note : {{a.note}} </mat-list-item>
-                            <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
-                            <mat-list-item>Matière : {{a.nom}}</mat-list-item>
-                          </mat-list>
-                        </mat-card-content>
-                      </mat-card>
-      
-                    </div>
-                  </ng-template> -->
       
                 </mat-list-item>
               </a>
@@ -111,16 +91,16 @@
         </cdk-virtual-scroll-viewport>
       </mat-grid-tile>
       <mat-grid-tile>
-        <cdk-virtual-scroll-viewport #scroller itemSize="150" class="example-viewport">
+        <cdk-virtual-scroll-viewport #scrollernonrendu itemSize="150" class="example-viewport">
           <mat-divider></mat-divider>
-          <mat-list *cdkVirtualFor="let a of assignments">
+          <mat-list *cdkVirtualFor="let a of assignmentsnonrendu">
             <nav>
               <a routerLink="/assignment/{{a.id}}">
                 <mat-list-item class="example-item">
       
-                  <!-- <div *ngIf="a.rendu; else nonsoumis" appRendu class="card-container">
+                  <div *ngIf="a.rendu; else nonsoumis" appNonRendu class="card-container">
                     <mat-card class="rendu-card">
-                      <mat-card-title>Rendu</mat-card-title>
+                      <mat-card-title>Non Rendu</mat-card-title>
                       <mat-card-content>
                         <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
                         <mat-list>
@@ -133,27 +113,7 @@
                         </mat-list>
                       </mat-card-content>
                     </mat-card>
-                  </div> -->
-                  <ng-template #nonsoumis>
-                    <div appNonRendu class="card-container">
-                      <mat-card>
-                        <mat-card-title>Non rendu</mat-card-title>
-      
-                        <mat-card-content>
-                          <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
-    
-                          <mat-list>
-                            <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
-                            <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
-                            <mat-list-item>Note : {{a.note}} </mat-list-item>
-                            <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
-                            <mat-list-item>Matière : {{a.nom}}</mat-list-item>
-                          </mat-list>
-                        </mat-card-content>
-                      </mat-card>
-      
-                    </div>
-                  </ng-template>
+                  </div>
       
                 </mat-list-item>
               </a>
@@ -161,8 +121,6 @@
           </mat-list>
         </cdk-virtual-scroll-viewport>
       </mat-grid-tile>
-      <mat-grid-tile>3</mat-grid-tile>
-      <mat-grid-tile>4</mat-grid-tile>
     </mat-grid-list>
 
   </div>

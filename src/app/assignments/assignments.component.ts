@@ -12,73 +12,134 @@ import { Assignment } from "./assignment.model";
 })
 export class AssignmentsComponent implements OnInit {
   assignments: Assignment[];
-  page: number = 1;
-  limit: number = 100;
-  totalDocs: number;
-  totalPages: number;
-  hasPrevPage: boolean;
-  prevPage: number;
-  hasNextPage: boolean;
-  nextPage: number;
+  assignmentsrendu: Assignment[];
 
-  @ViewChild("scroller") scroller: CdkVirtualScrollViewport;
+  assignmentsnonrendu: Assignment[];
+  page: any = {} ;
+  limit: any = {} ;
+  totalDocs: any = {};
+  totalPages: any = {};
+  hasPrevPage: any = {};
+  prevPage: any = {};
+  hasNextPage: any = {};
+  nextPage: any = {};
+  // page: number = 1;
+  // limit: number = 100;
+  // totalDocs: number;
+  // totalPages: number;
+  // hasPrevPage: boolean;
+  // prevPage: number;
+  // hasNextPage: boolean;
+  // nextPage: any;
+
+  @ViewChild("scrollerrendu") scrollerrendu: CdkVirtualScrollViewport;
+  @ViewChild("scrollernonrendu") scrollernonrendu: CdkVirtualScrollViewport;
 
   // on injecte le service de gestion des assignments
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private ngZone: NgZone
-  ) {}
+    private ngZone: NgZone) {
+      this.page.rendu = 1;
+      this.limit.rendu = 100;
+      this.page.nonrendu = 1;
+      this.limit.nonrendu = 100;
+      
+  }
 
   ngOnInit() {
     console.log("AVANT AFFICHAGE");
     // on regarde s'il y a page= et limit = dans l'URL
     this.route.queryParams.subscribe((queryParams) => {
       console.log("Dans le subscribe des queryParams");
-      this.page = +queryParams.page || 1;
-      this.limit = +queryParams.limit || 10;
+      this.page.rendu = +queryParams.page || 1;
+      this.limit.rendu = +queryParams.limit || 10;
 
-      this.getAssignments();
+      // this.getAssignments();
+      this.getAssignmentsRendu();
+      this.getAssignmentsNonRendu();
     });
     console.log("getAssignments() du service appelé");
   }
 
-  getAssignments() {
+  // getAssignments() {
+  //   this.assignmentsService
+  //     .getAssignmentsPagine(this.page, this.limit)
+  //     .subscribe((data) => {
+  //       this.assignments = data.docs;
+  //       this.page.rendu = data.page;
+  //       this.limit.rendu = data.limit;
+  //       this.totalDocs = data.totalDocs;
+  //       this.totalPages = data.totalPages;
+  //       this.hasPrevPage = data.hasPrevPage;
+  //       this.prevPage = data.prevPage;
+  //       this.hasNextPage = data.hasNextPage;
+  //       this.nextPage = data.nextPage;
+  //       console.log(this);
+  //       console.log("données reçues");
+  //     });
+  // }
+
+  getAssignmentsRendu() {
     this.assignmentsService
-      .getAssignmentsPagine(this.page, this.limit)
+      .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        console.log(this);
-        console.log("données reçues");
+        this.assignmentsrendu = data.docs;
+        this.page.rendu = data.page;
+        this.limit.rendu = data.limit;
+        this.totalDocs.rendu = data.totalDocs;
+        this.totalPages.rendu = data.totalPages;
+        this.hasPrevPage.rendu = data.hasPrevPage;
+        this.prevPage.rendu = data.prevPage;
+        this.hasNextPage.rendu = data.hasNextPage;
+        console.log("Check if données rendues reçues has next page:"+data.hasNextPage);
+        console.log("Check if this has next page:"+ this.hasNextPage.rendu);
+        this.nextPage.rendu = data.nextPage;
+        console.log(data);
+        console.log("données rendues reçues");
+      });
+  }
+
+  getAssignmentsNonRendu() {
+    this.assignmentsService
+      .getAssignmentsNonRendu(this.page, this.limit)
+      .subscribe((data) => {
+        this.assignmentsnonrendu = data.docs;
+        this.page.nonrendu = data.page;
+        this.limit.nonrendu = data.limit;
+        this.totalDocs.nonrendu = data.totalDocs;
+        this.totalPages.nonrendu = data.totalPages;
+        this.hasPrevPage.nonrendu = data.hasPrevPage;
+        this.prevPage.nonrendu = data.prevPage;
+        this.hasNextPage.nonrendu = data.hasNextPage;
+        this.nextPage.nonrendu = data.nextPage;
+        console.log(data);
+        console.log("données non rendues reçues");
       });
   }
 
   getPlusDAssignmentsPourScrolling() {
     this.assignmentsService
-      .getAssignmentsPagine(this.page, this.limit)
+      .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
+        console.log("données reçues dans les assigments pour scrolling");
+
+        console.log(data);
         // au lieu de remplacer this.assignments par les nouveaux assignments récupérés
         // on va les ajouter à ceux déjà présents...
-        this.assignments = this.assignments.concat(data.docs);
+        this.assignmentsrendu = this.assignmentsrendu.concat(data.docs);
         // this.assignments = [...this.assignments, ...data.docs];
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        console.log("données reçues");
+        this.page.rendu = data.page;
+        this.limit.rendu = data.limit;
+        this.totalDocs.rendu = data.totalDocs;
+        this.totalPages.rendu = data.totalPages;
+        this.hasPrevPage.rendu = data.hasPrevPage;
+        this.prevPage.rendu = data.prevPage;
+        this.hasNextPage.rendu = data.hasNextPage;
+        this.nextPage.rendu = data.nextPage;
+        console.log(this.assignmentsrendu);
+        console.log("données reçues dans les assignments pour scrolling");
       });
   }
 
@@ -87,11 +148,11 @@ export class AssignmentsComponent implements OnInit {
     // et affiché et ne vaudra pas "undefined" (ce qui aurait été le cas dans ngOnInit)
 
     // On va s'abonner aux évenements de scroll sur le scrolling...
-    this.scroller
+    this.scrollerrendu
       .elementScrolled()
       .pipe(
         map((event) => {
-          return this.scroller.measureScrollOffset("bottom");
+          return this.scrollerrendu.measureScrollOffset("bottom");
         }),
         pairwise(),
         /*
@@ -110,10 +171,12 @@ export class AssignmentsComponent implements OnInit {
       )
       .subscribe((dist) => {
         this.ngZone.run(() => {
-          if (this.hasNextPage) {
-            this.page = this.nextPage;
+          console.log("tonga eto");
+          console.log(this.hasNextPage.rendu)
+          if (this.hasNextPage.rendu) {
+            this.page.rendu = this.nextPage.rendu;
             console.log(
-              "Je charge de nouveaux assignments page = " + this.page
+              "Je charge de nouveaux assignments page = " + this.page.rendu
             );
             this.getPlusDAssignmentsPourScrolling();
           }
@@ -130,42 +193,42 @@ export class AssignmentsComponent implements OnInit {
     });
   }
 
-  premierePage() {
-    this.router.navigate(["/home"], {
-      queryParams: {
-        page: 1,
-        limit: this.limit,
-      },
-    });
-  }
+  // premierePage() {
+  //   this.router.navigate(["/home"], {
+  //     queryParams: {
+  //       page: 1,
+  //       limit: this.limit,
+  //     },
+  //   });
+  // }
 
-  pageSuivante() {
-    /*
-    this.page = this.nextPage;
-    this.getAssignments();*/
-    this.router.navigate(["/home"], {
-      queryParams: {
-        page: this.nextPage,
-        limit: this.limit,
-      },
-    });
-  }
+  // pageSuivante() {
+  //   /*
+  //   this.page = this.nextPage;
+  //   this.getAssignments();*/
+  //   this.router.navigate(["/home"], {
+  //     queryParams: {
+  //       page: this.nextPage,
+  //       limit: this.limit,
+  //     },
+  //   });
+  // }
 
-  pagePrecedente() {
-    this.router.navigate(["/home"], {
-      queryParams: {
-        page: this.prevPage,
-        limit: this.limit,
-      },
-    });
-  }
+  // pagePrecedente() {
+  //   this.router.navigate(["/home"], {
+  //     queryParams: {
+  //       page: this.prevPage,
+  //       limit: this.limit,
+  //     },
+  //   });
+  // }
 
-  dernierePage() {
-    this.router.navigate(["/home"], {
-      queryParams: {
-        page: this.totalPages,
-        limit: this.limit,
-      },
-    });
-  }
+  // dernierePage() {
+  //   this.router.navigate(["/home"], {
+  //     queryParams: {
+  //       page: this.totalPages,
+  //       limit: this.limit,
+  //     },
+  //   });
+  // }
 }

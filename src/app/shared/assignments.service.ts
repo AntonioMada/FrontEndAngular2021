@@ -17,13 +17,34 @@ export class AssignmentsService {
     private http: HttpClient
   ) {}
 
-  //uri = "http://localhost:8010/api/assignments";
-  uri = "https://backend2021.herokuapp.com/api/assignments"
+  uri = "http://localhost:8010/api/assignments";
+  uri_rendu = "http://localhost:8010/api/rendu"
+  uri_nonrendu = "http://localhost:8010/api/nonrendu"
+  //uri = "https://backend2021.herokuapp.com/api/assignments"
 
   getAssignments(): Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...");
     //return of(this.assignments);
     return this.http.get<Assignment[]>(this.uri);
+  }
+
+  getAssignmentsRendu(page: number, limit: number): Observable<any>{
+    console.log("Dans le service de gestion des assignments rendus...");
+    //return of(this.assignments);
+    var val = this.http.get<Assignment[]>(
+      this.uri_rendu + "?page=" + page + "&limit=" + limit
+    )
+    console.log("Voici val");
+    console.log(val);
+    return val; 
+  }
+
+  getAssignmentsNonRendu(page: number, limit: number): Observable<any>{
+    console.log("Dans le service de gestion des assignments non rendus...");
+    //return of(this.assignments);
+    return this.http.get<Assignment[]>(
+      this.uri_nonrendu + "?page=" + page + "&limit=" + limit
+    );
   }
 
   getAssignmentsPagine(page: number, limit: number): Observable<any> {
