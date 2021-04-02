@@ -73,7 +73,7 @@
               id="rendulist"
               (cdkDropListDropped)="drop($event)">
               <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
-              <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag>
+              <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag [cdkDragData]="a">
                 <nav>
                   <a routerLink="/assignment/{{a.id}}">
                     <mat-list-item class="example-item">
@@ -179,6 +179,7 @@
       <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
     </div>
   </div>
+  <button mat-button (click)="openDialog()">Open dialog</button>
 </main>
   <!-- <div class="col-md-3 mx-auto my-5" *ngFor="let a of assignments">
 
