@@ -6,6 +6,11 @@ import { AssignmentsService } from "../shared/assignments.service";
 import { Assignment } from "./assignment.model";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+export interface DialogData {
+  assigns: '';
+  id:100;
+  auteur:'';
+}
 
 @Component({
   selector: "app-assignments",
@@ -15,7 +20,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export class AssignmentsComponent implements OnInit {
   assignments: Assignment[];
   assignmentsrendu: Assignment[];
-
+  assignmentsdialogue: Assignment;
   assignmentsnonrendu: Assignment[];
   page: any = {} ;
   limit: any = {} ;
@@ -38,8 +43,10 @@ export class AssignmentsComponent implements OnInit {
   @ViewChild("scrollerrendu") scrollerrendu: CdkVirtualScrollViewport;
   @ViewChild("scrollernonrendu") scrollernonrendu: CdkVirtualScrollViewport;
 
+
   // on injecte le service de gestion des assignments
   constructor(
+    public dialog: MatDialog,
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
@@ -311,11 +318,34 @@ export class AssignmentsComponent implements OnInit {
       
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      this.dialog.open(assignementsDialogue, {
+        data: {
+          assigns: event.item.data,
+          id:event.item.data.id,
+          auteur:event.item.data.auteur
+        }
+      });
+        console.log(event.item.data);
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
         
     }
-  }  
+  }
+  
+  openDialog() {
+    this.dialog.open(assignementsDialogue, {
+      data: {
+        animal: 'panda'
+      }
+    });
+  }
 }
+@Component({
+  selector: 'assignements.dialogue',
+  templateUrl: 'assignements.dialogue.html',
+})
+export class assignementsDialogue {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+}  
