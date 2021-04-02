@@ -171,8 +171,6 @@ export class AssignmentsComponent implements OnInit {
       )
       .subscribe((dist) => {
         this.ngZone.run(() => {
-          console.log("tonga eto");
-          console.log(this.hasNextPage.rendu)
           if (this.hasNextPage.rendu) {
             this.page.rendu = this.nextPage.rendu;
             console.log(
@@ -231,4 +229,6 @@ export class AssignmentsComponent implements OnInit {
   //     },
   //   });
   // }
+
+
 }
