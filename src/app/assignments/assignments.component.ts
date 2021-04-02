@@ -1,9 +1,11 @@
 import { CdkVirtualScrollViewport } from "@angular/cdk/scrolling";
-import { Component, NgZone, OnInit, ViewChild } from "@angular/core";
+import { Component, NgZone, OnInit, ViewChild, Inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { filter, map, pairwise, tap, throttleTime } from "rxjs/operators";
 import { AssignmentsService } from "../shared/assignments.service";
 import { Assignment } from "./assignment.model";
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: "app-assignments",
@@ -23,6 +25,7 @@ export class AssignmentsComponent implements OnInit {
   prevPage: any = {};
   hasNextPage: any = {};
   nextPage: any = {};
+  newnote: number;
   // page: number = 1;
   // limit: number = 100;
   // totalDocs: number;
@@ -287,5 +290,32 @@ export class AssignmentsComponent implements OnInit {
   //   });
   // }
 
+  todo = [
+    'Get to work',
+    'Pick up groceries',
+    'Go home',
+    'Fall asleep'
+  ];
 
+  done = [
+    'Get up',
+    'Brush teeth',
+    'Take a shower',
+    'Check e-mail',
+    'Walk dog'
+  ];
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      console.log("previous === container");
+      
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+        
+    }
+  }  
 }
