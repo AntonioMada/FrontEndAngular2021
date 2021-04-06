@@ -16,10 +16,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import {MatDialogModule} from '@angular/material/dialog'
+import {MatDialogModule} from '@angular/material/dialog';
 
 
-import { AssignmentsComponent } from './assignments/assignments.component';
+import {MatSelectModule} from '@angular/material/select';
+import { assignementsDialogue, AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
 import { NonRenduDirective } from './shared/non-rendu.directive';
 import { FormsModule } from '@angular/forms';
@@ -70,7 +71,8 @@ const routes:Routes = [
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssigmentComponent,
-    UserComponent
+    UserComponent,
+    assignementsDialogue
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,7 @@ const routes:Routes = [
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule, MatCheckboxModule,
     MatSlideToggleModule,
-    RouterModule.forRoot(routes), HttpClientModule, ScrollingModule,
+    RouterModule.forRoot(routes), HttpClientModule, ScrollingModule,MatSelectModule,
     MatGridListModule,
     DragDropModule,
     MatDialogModule,

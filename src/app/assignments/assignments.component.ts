@@ -6,11 +6,7 @@ import { AssignmentsService } from "../shared/assignments.service";
 import { Assignment } from "./assignment.model";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-export interface DialogData {
-  assigns: '';
-  id:100;
-  auteur:'';
-}
+
 
 @Component({
   selector: "app-assignments",
@@ -297,20 +293,7 @@ export class AssignmentsComponent implements OnInit {
   //   });
   // }
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
 
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -321,8 +304,7 @@ export class AssignmentsComponent implements OnInit {
       this.dialog.open(assignementsDialogue, {
         data: {
           assigns: event.item.data,
-          id:event.item.data.id,
-          auteur:event.item.data.auteur
+          tableau:  new Array(21)
         }
       });
         console.log(event.item.data);
@@ -334,18 +316,34 @@ export class AssignmentsComponent implements OnInit {
     }
   }
   
-  openDialog() {
-    this.dialog.open(assignementsDialogue, {
-      data: {
-        animal: 'panda'
-      }
-    });
-  }
 }
 @Component({
   selector: 'assignements.dialogue',
   templateUrl: 'assignements.dialogue.html',
 })
 export class assignementsDialogue {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  note=0;
+  assignment:Assignment;
+  constructor(
+    private assignmentsService: AssignmentsService,
+    public dialog: MatDialogRef<assignementsDialogue>,@Inject(MAT_DIALOG_DATA) public data) {
+  }
+  
+  onNoClick() {
+    
+    this.dialog.close();
+  }
+  submit(assignment:Assignment) {
+     console.log(this.note);
+     this.assignment=assignment;
+    this.assignment.note=this.note;
+    if(assignment.rendu){this.assignment.rendu=false}else{this.assignment.rendu=true};
+    
+    
+    this.assignmentsService.updateAssignment(this.assignment)
+       .subscribe(message => {
+        console.log(message);
+
+       })
+  }
 }  

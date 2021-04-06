@@ -1,8 +1,23 @@
 <h1 mat-dialog-title>Nouveau note</h1>
-<div mat-dialog-content>
-    {{data.assigns}}
+    <mat-list >
+        <mat-list-item role="listitem">
+            Nom: {{data.assigns.nom}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            Auteur: {{data.assigns.auteur}}
+        </mat-list-item>
+      </mat-list>
 
-    {{data.id}}
-    {{data.auteur}}
-    <input matInput  name="date" placeholder="note">
-</div>
+  <form ngForm #formDialogue class="form" (submit)="submit(data.assigns); ">
+   
+    <mat-form-field appearance="fill">
+        <mat-label>Nouveau note</mat-label>
+        <mat-select [(ngModel)]="note" [ngModelOptions]="{standalone: true}">
+            <mat-option required name="note"  value="{{iteration}}" *ngFor="let item of data.tableau;let iteration = index">{{ iteration }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" cdkFocusInitial>exit</button>
+        <button type="submit"> Change</button>
+    </div>
+</form>

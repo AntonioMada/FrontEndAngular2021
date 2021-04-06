@@ -118,7 +118,7 @@
 
               (cdkDropListDropped)="drop($event)">
               <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
-              <div *cdkVirtualFor="let a of assignmentsnonrendu" class="example-box" cdkDrag>
+              <div *cdkVirtualFor="let a of assignmentsnonrendu" class="example-box" cdkDrag [cdkDragData]="a">
                 <nav>
                   <a routerLink="/assignment/{{a.id}}">
                     <mat-list-item class="example-item">
@@ -151,49 +151,5 @@
     </mat-grid-list>
 
   </div>
-  <div class="example-container">
-    <h2>To do</h2>
-  
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="todo"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-      
-    </div>
-  </div>
-  
-  <div class="example-container">
-    <h2>Done</h2>
-  
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-    </div>
-  </div>
-  <button mat-button (click)="openDialog()">Open dialog</button>
 </main>
-  <!-- <div class="col-md-3 mx-auto my-5" *ngFor="let a of assignments">
-
-  <mat-card class="card-shiba" >
-    <mat-card-header>
-      <div mat-card-avatar class="header-image"></div>
-      <mat-card-title>{{a.nom}}</mat-card-title>
-      <mat-card-subtitle>{{a.dateDeRendu}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>{{a.auteur }} {{a.id_matiere}} {{a.auteur}} {{a.note}} {{a.remarques}}
-      </p>
-    </mat-card-content>
-
-  </mat-card>
-  </div> -->
+  
