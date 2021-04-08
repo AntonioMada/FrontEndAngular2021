@@ -75,7 +75,6 @@
               <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
               <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag [cdkDragData]="a">
                 <nav>
-                  <a routerLink="/assignment/{{a.id}}">
                     <mat-list-item class="example-item">
           
                       <div appRendu class="card-container">
@@ -83,20 +82,21 @@
                           <mat-card-title>Rendu</mat-card-title>
                           <mat-card-content>
                             <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
-                            <mat-list>
+                            <mat-list> 
+                              <mat-list-item>Nom : {{a.nom}}  </mat-list-item>
+                           
                               <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
                               <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
                               <mat-list-item>Note : {{a.note}} </mat-list-item>
-                              <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
                               <mat-list-item>Matière : {{a.nom}}</mat-list-item>
-        
+                             
+                              <mat-list-item><a routerLink="/assignment/{{a.id}}">detail </a></mat-list-item> 
                             </mat-list>
                           </mat-card-content>
                         </mat-card>
                       </div>
           
                     </mat-list-item>
-                  </a>
                 </nav>
               </mat-list>
             </div>
@@ -118,9 +118,8 @@
 
               (cdkDropListDropped)="drop($event)">
               <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
-              <div *cdkVirtualFor="let a of assignmentsnonrendu" class="example-box" cdkDrag>
+              <div *cdkVirtualFor="let a of assignmentsnonrendu" class="example-box" cdkDrag [cdkDragData]="a">
                 <nav>
-                  <a routerLink="/assignment/{{a.id}}">
                     <mat-list-item class="example-item">
           
                       <div appNonRendu class="card-container">
@@ -129,19 +128,19 @@
                           <mat-card-content>
                             <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
                             <mat-list>
+                                <mat-list-item>Nom : {{a.nom}} </mat-list-item>
                               <mat-list-item>Id matiere : {{a.id_matiere}} </mat-list-item>
                               <mat-list-item>Auteur : {{a.auteur}}</mat-list-item>
                               <mat-list-item>Note : {{a.note}} </mat-list-item>
-                              <mat-list-item>Remarques : {{a.remarques}}</mat-list-item>
                               <mat-list-item>Matière : {{a.nom}}</mat-list-item>
         
+                              <mat-list-item><a routerLink="/assignment/{{a.id}}">detail </a></mat-list-item> 
                             </mat-list>
                           </mat-card-content>
                         </mat-card>
                       </div>
           
                     </mat-list-item>
-                  </a>
                 </nav>
               </div>
             </div>
@@ -152,19 +151,4 @@
 
   </div>
 </main>
-  <!-- <div class="col-md-3 mx-auto my-5" *ngFor="let a of assignments">
-
-  <mat-card class="card-shiba" >
-    <mat-card-header>
-      <div mat-card-avatar class="header-image"></div>
-      <mat-card-title>{{a.nom}}</mat-card-title>
-      <mat-card-subtitle>{{a.dateDeRendu}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>{{a.auteur }} {{a.id_matiere}} {{a.auteur}} {{a.note}} {{a.remarques}}
-      </p>
-    </mat-card-content>
-
-  </mat-card>
-  </div> -->
+  

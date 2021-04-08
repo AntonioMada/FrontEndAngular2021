@@ -5,13 +5,10 @@ import { filter, map, pairwise, tap, throttleTime } from "rxjs/operators";
 import { AssignmentsService } from "../shared/assignments.service";
 import { Assignment } from "./assignment.model";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { assignementsDialogue } from "./dialogue/assignementsdialogue.component";
+import { MatieresService } from "../shared/matieres.service";
 
-export interface DialogData {
-  assigns: '';
-  id:100;
-  auteur:'';
-}
 
 @Component({
   selector: "app-assignments",
@@ -23,6 +20,7 @@ export class AssignmentsComponent implements OnInit {
   assignmentsrendu: Assignment[];
   assignmentsdialogue: Assignment;
   assignmentsnonrendu: Assignment[];
+  assignementsDialogue:assignementsDialogue;
   page: any = {} ;
   limit: any = {} ;
   totalDocs: any = {};
@@ -49,6 +47,7 @@ export class AssignmentsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private assignmentsService: AssignmentsService,
+    private matieresService: MatieresService,
     private route: ActivatedRoute,
     private router: Router,
     private ngZone: NgZone) {
@@ -298,6 +297,8 @@ export class AssignmentsComponent implements OnInit {
   //   });
   // }
 
+
+
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       console.log("previous === container");
@@ -306,8 +307,7 @@ export class AssignmentsComponent implements OnInit {
       this.dialog.open(assignementsDialogue, {
         data: {
           assigns: event.item.data,
-          id:event.item.data.id,
-          auteur:event.item.data.auteur
+          tableau:  new Array(21)
         }
       });
         console.log(event.item.data);
@@ -319,18 +319,4 @@ export class AssignmentsComponent implements OnInit {
     }
   }
   
-  openDialog() {
-    this.dialog.open(assignementsDialogue, {
-      data: {
-        animal: 'panda'
-      }
-    });
-  }
 }
-@Component({
-  selector: 'assignements.dialogue',
-  templateUrl: 'assignements.dialogue.html',
-})
-export class assignementsDialogue {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-}  
