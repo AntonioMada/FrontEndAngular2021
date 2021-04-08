@@ -20,7 +20,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 
 import {MatSelectModule} from '@angular/material/select';
-import { assignementsDialogue, AssignmentsComponent } from './assignments/assignments.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
+import { assignementsDialogue } from './assignments/dialogue/assignementsdialogue.component';
 import { RenduDirective } from './shared/rendu.directive';
 import { NonRenduDirective } from './shared/non-rendu.directive';
 import { FormsModule } from '@angular/forms';

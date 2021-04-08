@@ -37,8 +37,6 @@ export class AssignmentsService {
     var val = this.http.get<Assignment[]>(
       this.uri_rendu + "?page=" + page + "&limit=" + limit
     )
-    console.log("Voici val");
-    console.log(val);
     return val; 
   }
 
