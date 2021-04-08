@@ -5,7 +5,8 @@ import { filter, map, pairwise, tap, throttleTime } from "rxjs/operators";
 import { AssignmentsService } from "../shared/assignments.service";
 import { Assignment } from "./assignment.model";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 export interface DialogData {
   assigns: '';
   id:100;
@@ -296,21 +297,6 @@ export class AssignmentsComponent implements OnInit {
   //     },
   //   });
   // }
-
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
