@@ -59,6 +59,8 @@ export class AssignmentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     console.log("AVANT AFFICHAGE");
     // on regarde s'il y a page= et limit = dans l'URL
     this.route.queryParams.subscribe((queryParams) => {
@@ -92,6 +94,8 @@ export class AssignmentsComponent implements OnInit {
   // }
 
   getAssignmentsRendu() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
@@ -112,6 +116,8 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getAssignmentsNonRendu() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsNonRendu(this.page, this.limit)
       .subscribe((data) => {
@@ -130,6 +136,8 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getPlusDAssignmentsPourScrolling() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
@@ -153,6 +161,8 @@ export class AssignmentsComponent implements OnInit {
       });
   }
   getPlusDAssignmentsNonPourScrolling() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsNonRendu(this.page.nonrendu, this.limit.nonrendu)
       .subscribe((data) => {
@@ -176,6 +186,8 @@ export class AssignmentsComponent implements OnInit {
       });
   }
   ngAfterViewInit() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     // Appelé automatiquement après l'affichage, donc l'élément scroller aura
     // et affiché et ne vaudra pas "undefined" (ce qui aurait été le cas dans ngOnInit)
 
@@ -250,6 +262,8 @@ export class AssignmentsComponent implements OnInit {
   }
 
   onDeleteAssignment(event) {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     // event = l'assignment à supprimer
 
     //this.assignments.splice(index, 1);
@@ -300,6 +314,8 @@ export class AssignmentsComponent implements OnInit {
 
 
   drop(event: CdkDragDrop<string[]>) {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     if (event.previousContainer === event.container) {
       console.log("previous === container");
       

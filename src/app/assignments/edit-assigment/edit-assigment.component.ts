@@ -22,6 +22,8 @@ export class EditAssigmentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     // ici on montre comment on peut récupérer les parametres http
     // par ex de :
     // http://localhost:4200/assignment/1/edit?nom=Michel%20Buffa&metier=Professeur&responsable=MIAGE#edition
@@ -48,6 +50,8 @@ export class EditAssigmentComponent implements OnInit {
 
 
   onSubmit(event) {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     // on va modifier l'assignment
     if((!this.nom) || (!this.dateDeRendu)) return;
 
