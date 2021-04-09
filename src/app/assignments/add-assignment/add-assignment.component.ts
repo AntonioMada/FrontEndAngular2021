@@ -16,9 +16,13 @@ export class AddAssignmentComponent implements OnInit {
   constructor(private assignmentsService:AssignmentsService,
               private router:Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}}
 
   onSubmit(event) {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     if((!this.nom) || (!this.dateDeRendu)) return;
 
     let nouvelAssignment = new Assignment();

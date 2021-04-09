@@ -17,7 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { JwtModule } from '@auth0/angular-jwt';
 
 import {MatSelectModule} from '@angular/material/select';
 import { AssignmentsComponent } from './assignments/assignments.component';
@@ -77,7 +77,8 @@ const routes:Routes = [
     AddAssignmentComponent,
     EditAssigmentComponent,
     UserComponent,
-    assignementsDialogue
+    assignementsDialogue,
+   
   ],
   imports: [
     BrowserModule,
@@ -90,7 +91,8 @@ const routes:Routes = [
     RouterModule.forRoot(routes), HttpClientModule, ScrollingModule,MatSelectModule,
     MatGridListModule,
     DragDropModule,
-    MatDialogModule,
+    MatDialogModule, 
+    JwtModule
   ],
   providers: [],
   bootstrap: [AppComponent]

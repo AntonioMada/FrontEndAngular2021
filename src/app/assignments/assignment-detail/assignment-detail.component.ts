@@ -21,6 +21,8 @@ export class AssignmentDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.getAssignmentById();
   }
 
@@ -36,6 +38,8 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   onAssignmentRendu() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.assignmentTransmis.rendu = true;
 
     this.assignmentsService
@@ -50,6 +54,8 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   onDelete() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.assignmentsService
       .deleteAssignment(this.assignmentTransmis)
       .subscribe((reponse) => {
@@ -64,6 +70,8 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   onClickEdit() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     this.router.navigate(['/assignment', this.assignmentTransmis.id, 'edit'], {
       queryParams: {
         nom:'Michel Buffa',
@@ -75,6 +83,8 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   isAdmin() {
+    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
+    this.router.navigate(["/login"]);}
     return this.authService.admin;
   }
 }
