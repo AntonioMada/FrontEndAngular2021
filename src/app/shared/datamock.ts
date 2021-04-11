@@ -1,3 +1,4 @@
+export const assignmentsGeneres =
 [{"id":1,"nom":"Jewelery","dateDeRendu":"3/11/2021","rendu":true,"auteur":"Rochette Scupham","id_matiere":4,"note":1,"remarques":"luctus et ultrices posuere cubilia curae donec"},
 {"id":2,"nom":"Baby","dateDeRendu":"4/11/2021","rendu":true,"auteur":"Rutherford Ibarra","id_matiere":2,"note":3,"remarques":"dui proin"},
 {"id":3,"nom":"Computers","dateDeRendu":"4/8/2021","rendu":false,"auteur":"Iggie Ryves","id_matiere":1,"note":18,"remarques":"elementum nullam varius nulla facilisi cras non velit"},

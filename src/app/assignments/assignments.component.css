@@ -21,15 +21,14 @@
 .card-container {
   width: 400px;
 }
-
-/* .card-shiba {
+.example-card {
   max-width: 400px;
-} */
+}
 
-/* .header-image {
+.example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
-} */
+}
 
 .example-container {
   width: 100%;

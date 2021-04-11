@@ -11,8 +11,8 @@ export class LoginService {
 
   //uri = "http://localhost:8010/api/users";
   //uritoken = "https://localhost.8010/api/users/check";
-  uri = "https://backend2021.herokuapp.com/users";
-  uritoken = "https://backend2021.herokuapp.com/users/check";
+  uri = "https://backend2021.herokuapp.com/api/users";
+  uritoken = "https://backend2021.herokuapp.com/api/users/check";
  
   login(login,mdp): Observable<boolean>{
    // console.log(login+"  "+mdp)
