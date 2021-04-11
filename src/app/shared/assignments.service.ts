@@ -140,10 +140,10 @@ export class AssignmentsService {
   }
 
   peuplerBD() {
-    const objectId = ["60608224ee0ca096a8127ac6", "60608224ee0ca096a8127ac7", "60608224ee0ca096a8127ac8", "60608224ee0ca096a8127ac9"];
+    //const objectId = ["60608224ee0ca096a8127ac6", "60608224ee0ca096a8127ac7", "60608224ee0ca096a8127ac8", "60608224ee0ca096a8127ac9"];
  
     assignmentsGeneres.forEach((a) => {   
-      const random = Math.floor(Math.random() * objectId.length);
+      //const random = Math.floor(Math.random() * objectId.length);
       let nouvelAssignment = new Assignment();
       nouvelAssignment.nom = a.nom;
       nouvelAssignment.id = a.id;
@@ -153,7 +153,7 @@ export class AssignmentsService {
       nouvelAssignment.note = a.note;
       nouvelAssignment.auteur = a.auteur;
       nouvelAssignment.remarques = a.remarques;
-      nouvelAssignment.id_matiere = objectId[random];
+      nouvelAssignment.id_matiere = a.id_matiere;
       this.addAssignment(nouvelAssignment).subscribe((reponse) => {
         console.log(reponse.message);
       });
@@ -163,13 +163,13 @@ export class AssignmentsService {
   // autre version qui permet de récupérer un subscribe une fois que tous les inserts
   // ont été effectués
   peuplerBDAvecForkJoin(): Observable<any> {
-    const objectId = ["60608224ee0ca096a8127ac6", "60608224ee0ca096a8127ac7", "60608224ee0ca096a8127ac8", "60608224ee0ca096a8127ac9"];
+   // const objectId = ["60608224ee0ca096a8127ac6", "60608224ee0ca096a8127ac7", "60608224ee0ca096a8127ac8", "60608224ee0ca096a8127ac9"];
     
   
     const appelsVersAddAssignment = [];
 
     assignmentsGeneres.forEach((a) => {
-      const random = Math.floor(Math.random() * objectId.length);
+      //const random = Math.floor(Math.random() * objectId.length);
       let nouvelAssignment = new Assignment();
       nouvelAssignment.nom = a.nom;
       nouvelAssignment.id = a.id;
@@ -179,10 +179,10 @@ export class AssignmentsService {
       nouvelAssignment.note = a.note;
       nouvelAssignment.auteur = a.auteur;
       nouvelAssignment.remarques = a.remarques;
-      nouvelAssignment.id_matiere = objectId[random];
+      nouvelAssignment.id_matiere =a.id_matiere //objectId[random];
       console.log(nouvelAssignment.id_matiere);
       this.addAssignment(nouvelAssignment).subscribe((reponse) => {
-        // console.log(reponse.message);
+         console.log(reponse.message);
       });
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
