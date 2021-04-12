@@ -7,5 +7,5 @@ export class Assignment {
   rendu:boolean;
   note:number;
   auteur:string;
-  remarque:String;
+  remarques:String;
 }

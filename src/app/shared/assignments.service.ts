@@ -4,7 +4,7 @@ import { forkJoin, Observable, of } from "rxjs";
 import { catchError, filter, map, tap } from "rxjs/operators";
 import { Assignment } from "../assignments/assignment.model";
 import { LoggingService } from "./logging.service";
-import { assignmentsGeneres } from "./data";
+import { assignmentsGeneres } from "./datamock";
 
 @Injectable({
   providedIn: "root",
@@ -139,13 +139,20 @@ export class AssignmentsService {
   }
 
   peuplerBD() {
-    assignmentsGeneres.forEach((a) => {
+    //const objectId = ["60608224ee0ca096a8127ac6", "60608224ee0ca096a8127ac7", "60608224ee0ca096a8127ac8", "60608224ee0ca096a8127ac9"];
+ 
+    assignmentsGeneres.forEach((a) => {   
+      //const random = Math.floor(Math.random() * objectId.length);
       let nouvelAssignment = new Assignment();
       nouvelAssignment.nom = a.nom;
       nouvelAssignment.id = a.id;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
-
+          
+      nouvelAssignment.note = a.note;
+      nouvelAssignment.auteur = a.auteur;
+      nouvelAssignment.remarques = a.remarques;
+      nouvelAssignment.id_matiere = a.id_matiere;
       this.addAssignment(nouvelAssignment).subscribe((reponse) => {
         console.log(reponse.message);
       });
@@ -155,17 +162,27 @@ export class AssignmentsService {
   // autre version qui permet de récupérer un subscribe une fois que tous les inserts
   // ont été effectués
   peuplerBDAvecForkJoin(): Observable<any> {
+   // const objectId = ["60608224ee0ca096a8127ac6", "60608224ee0ca096a8127ac7", "60608224ee0ca096a8127ac8", "60608224ee0ca096a8127ac9"];
+    
+  
     const appelsVersAddAssignment = [];
 
     assignmentsGeneres.forEach((a) => {
-      const nouvelAssignment = new Assignment();
-
-      nouvelAssignment.id = a.id;
+      //const random = Math.floor(Math.random() * objectId.length);
+      let nouvelAssignment = new Assignment();
       nouvelAssignment.nom = a.nom;
+      nouvelAssignment.id = a.id;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
-
-      appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));
+          
+      nouvelAssignment.note = a.note;
+      nouvelAssignment.auteur = a.auteur;
+      nouvelAssignment.remarques = a.remarques;
+      nouvelAssignment.id_matiere =a.id_matiere //objectId[random];
+      console.log(nouvelAssignment.id_matiere);
+      this.addAssignment(nouvelAssignment).subscribe((reponse) => {
+         console.log(reponse.message);
+      });
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
   }
