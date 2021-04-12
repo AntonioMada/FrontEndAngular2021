@@ -169,4 +169,10 @@ export class AssignmentsService {
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
   }
+
+  populateDB(): Observable<any> {
+    // this.http.get(this.uri.)
+    console.log("assignement service: populating db")
+    return this.http.get(this.uri+"/populatedb")
+  }
 }

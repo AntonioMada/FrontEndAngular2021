@@ -57,4 +57,8 @@ export class AppComponent {
       })
       
   }
+  newpeuplerBD(){
+    console.log("Populate db clicked");
+    this.assignmentsService.populateDB()
+  }
 }
