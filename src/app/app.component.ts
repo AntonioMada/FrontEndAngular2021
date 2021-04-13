@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AssignmentsService } from './shared/assignments.service';
 import { AuthService } from './shared/auth.service';
 import { LoginService } from './shared/login.service';
@@ -10,11 +11,18 @@ import { LoginService } from './shared/login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  showMenu = true;
   title = 'Application de gestion des assignments';
 
   constructor(private authService:AuthService, private router:Router,
               private assignmentsService:AssignmentsService,private loginService:LoginService) {}
-
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart)  
+    ).subscribe((event: NavigationStart) => {
+      this.showMenu = event.url !== '/login'; 
+    });
+  }
   login() {
     // si je suis pas loggé, je me loggue, sinon, si je suis
     // loggé je me déloggue et j'affiche la page d'accueil

@@ -150,7 +150,7 @@ export class AssignmentsService {
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
           
-      nouvelAssignment.note = a.note;
+      if(nouvelAssignment.rendu) nouvelAssignment.note = a.note;
       nouvelAssignment.auteur = a.auteur;
       nouvelAssignment.remarques = a.remarques;
       nouvelAssignment.id_matiere = a.id_matiere;
@@ -175,8 +175,7 @@ export class AssignmentsService {
       nouvelAssignment.id = a.id;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
-          
-      nouvelAssignment.note = a.note;
+      if(nouvelAssignment.rendu) nouvelAssignment.note = a.note;
       nouvelAssignment.auteur = a.auteur;
       nouvelAssignment.remarques = a.remarques;
       nouvelAssignment.id_matiere =a.id_matiere //objectId[random];

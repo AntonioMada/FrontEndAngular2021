@@ -24,11 +24,12 @@ import { Router } from '@angular/router';
        
        console.log(this.note);
        this.assignment=assignment;
-      this.assignment.note=this.note;
       if(assignment.rendu){
+        this.assignment.note=null;
         this.assignment.rendu=false
         this.rendus="l'assignements est modifié de non rendu avec la note de "+this.note;
       }else{
+        this.assignment.note=this.note;
         this.assignment.rendu=true
         this.rendus="l'assignements est rendu avec la note de "+this.note;
       };

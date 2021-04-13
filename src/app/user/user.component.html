@@ -14,10 +14,13 @@
                
           <mat-form-field class="example-full-width">
             <input type="password" matInput placeholder="Password" required [(ngModel)]="password" name="password">
-          </mat-form-field>
-        </mat-card-content>
+          </mat-form-field> 
+          <mat-label class="error">{{error}}</mat-label>
+       
+        </mat-card-content>  
         <button mat-stroked-button color="accent" class="btn-block">Log in</button>
       </form>
+    <div></div>
     </mat-card>
   
   </div>

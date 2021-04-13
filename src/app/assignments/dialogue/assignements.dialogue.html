@@ -8,9 +8,9 @@
         </mat-list-item>
       </mat-list>
 
-  <form ngForm #formDialogue class="form" (submit)="submit(data.assigns); ">
+  <form ngForm  #formDialogue class="form" (submit)="submit(data.assigns); ">
    
-    <mat-form-field appearance="fill">
+    <mat-form-field *ngIf="data.assigns.rendu==false" appearance="fill">
         <mat-label>Nouveau note</mat-label>
         <mat-select [(ngModel)]="note" [ngModelOptions]="{standalone: true}">
             <mat-option required name="note"  value="{{iteration}}" *ngFor="let item of data.tableau;let iteration = index">{{ iteration }}</mat-option>

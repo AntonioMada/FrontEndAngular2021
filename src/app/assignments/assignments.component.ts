@@ -9,6 +9,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { assignementsDialogue } from "./dialogue/assignementsdialogue.component";
 import { MatieresService } from "../shared/matieres.service";
 
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: "app-assignments",
@@ -44,7 +45,7 @@ export class AssignmentsComponent implements OnInit {
 
 
   // on injecte le service de gestion des assignments
-  constructor(
+  constructor(private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private assignmentsService: AssignmentsService,
     private matieresService: MatieresService,
@@ -59,10 +60,13 @@ export class AssignmentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
+    if(localStorage.getItem('token')==null){
+    this.router.navigate(["/login"]);
+    this._snackBar.open('veillez vous connectez','ok');
+  }
+   else{
     console.log("AVANT AFFICHAGE");
-    // on regarde s'il y a page= et limit = dans l'URL
+    // on regarde s'il y a page= et limit = dans l'URL  
     this.route.queryParams.subscribe((queryParams) => {
       console.log("Dans le subscribe des queryParams");
       this.page.rendu = +queryParams.page || 1;
@@ -72,7 +76,7 @@ export class AssignmentsComponent implements OnInit {
       this.getAssignmentsRendu();
       this.getAssignmentsNonRendu();
     });
-    console.log("getAssignments() du service appelé");
+    console.log("getAssignments() du service appelé");}
   }
 
   // getAssignments() {
@@ -94,8 +98,6 @@ export class AssignmentsComponent implements OnInit {
   // }
 
   getAssignmentsRendu() {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
@@ -116,8 +118,6 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getAssignmentsNonRendu() {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsNonRendu(this.page, this.limit)
       .subscribe((data) => {
@@ -136,8 +136,6 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getPlusDAssignmentsPourScrolling() {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
@@ -161,8 +159,6 @@ export class AssignmentsComponent implements OnInit {
       });
   }
   getPlusDAssignmentsNonPourScrolling() {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     this.assignmentsService
       .getAssignmentsNonRendu(this.page.nonrendu, this.limit.nonrendu)
       .subscribe((data) => {
@@ -186,8 +182,6 @@ export class AssignmentsComponent implements OnInit {
       });
   }
   ngAfterViewInit() {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     // Appelé automatiquement après l'affichage, donc l'élément scroller aura
     // et affiché et ne vaudra pas "undefined" (ce qui aurait été le cas dans ngOnInit)
 
@@ -262,8 +256,6 @@ export class AssignmentsComponent implements OnInit {
   }
 
   onDeleteAssignment(event) {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     // event = l'assignment à supprimer
 
     //this.assignments.splice(index, 1);
@@ -314,8 +306,6 @@ export class AssignmentsComponent implements OnInit {
 
 
   drop(event: CdkDragDrop<string[]>) {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
     if (event.previousContainer === event.container) {
       console.log("previous === container");
       

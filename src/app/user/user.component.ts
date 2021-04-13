@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { LoginService } from "../shared/login.service";
 
 @Component({
@@ -10,13 +10,15 @@ import { LoginService } from "../shared/login.service";
 export class UserComponent implements OnInit {
   name=""
   password=""
-
+  error=""
   constructor(
     private loginService:LoginService,
-    private router:Router
+    private router:Router,
+    private route: ActivatedRoute
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    this.error;
   }
   login(event) {
     let name = this.name
@@ -24,10 +26,11 @@ export class UserComponent implements OnInit {
 
     this.loginService.login(name,password)  
       .subscribe(reponse => {
-        console.log("ao mety");
-
-        // et on navigue vers la page d'accueil qui affiche la liste
+        
         this.router.navigate(["/home"]);
+    }, error => {
+      this.error=error.error;
+      this.router.navigate(["/login"],error.error);
     });
   }
 }
