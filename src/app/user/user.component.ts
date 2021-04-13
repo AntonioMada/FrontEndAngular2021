@@ -26,7 +26,6 @@ export class UserComponent implements OnInit {
 
     this.loginService.login(name,password)  
       .subscribe(reponse => {
-        
         this.router.navigate(["/home"]);
     }, error => {
       this.error=error.error;
