@@ -9,10 +9,10 @@ export class LoginService {
 
   constructor(private http:HttpClient) {}
 
-  uri = "http://localhost:8010/api/users";
-  uritoken = "https://localhost.8010/api/users/check";
-  // uri = "https://backend2021.herokuapp.com/users";
-  // uritoken = "https://backend2021.herokuapp.com/users/check";
+  // uri = "http://localhost:8010/api/users";
+  // uritoken = "https://localhost.8010/api/users/check";
+  uri = "https://backend2021.herokuapp.com/users";
+  uritoken = "https://backend2021.herokuapp.com/users/check";
  
   login(login,mdp): Observable<boolean>{
    // console.log(login+"  "+mdp)
