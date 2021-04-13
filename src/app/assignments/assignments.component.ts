@@ -308,7 +308,6 @@ export class AssignmentsComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       console.log("previous === container");
-      
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       this.dialog.open(assignementsDialogue, {

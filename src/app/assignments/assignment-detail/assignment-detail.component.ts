@@ -12,7 +12,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class AssignmentDetailComponent implements OnInit {
   // passé sous forme d'attribut HTML
-  assignmentTransmis: Assignment;
+  assignmentTransmis: any;
 
   constructor(private _snackBar: MatSnackBar,
     private assignmentsService: AssignmentsService,
@@ -36,6 +36,7 @@ export class AssignmentDetailComponent implements OnInit {
     console.log('Dans ngOnInit de details, id = ' + id);
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignmentTransmis = assignment;
+      console.log(this.assignmentTransmis);
     });
   }
 

@@ -13,6 +13,19 @@
 
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Matière</mat-label>
+    <mat-select name="id_matiere" [(ngModel)]="id_matiere">
+      <div >
+        <mat-option *ngFor="let matiere of matieres" [value]="matiere.id">
+          {{matiere.nom}}
+        </mat-option>
+      </div>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Remarques" required [(ngModel)]="remarques" name="remarques">
+  </mat-form-field>
 
   <button mat-stroked-button color="primary">
     Modifier le devoir

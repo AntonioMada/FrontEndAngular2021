@@ -5,22 +5,25 @@ import { catchError, filter, map, tap } from "rxjs/operators";
 import { Assignment } from "../assignments/assignment.model";
 import { LoggingService } from "./logging.service";
 import { assignmentsGeneres } from "./datamock";
+import { Matiere } from "../assignments/model/matiere.model";
+import { MatieresService } from "./matieres.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AssignmentsService {
-  assignments: Assignment[];
+  // assignments: Assignment[];
+  
 
   constructor(
     private loggingService: LoggingService,
+    private matiereService: MatieresService,
     private http: HttpClient
   ) {}
 
-  //  uri = "http://localhost:8010/api/assignments";
+  // uri = "http://localhost:8010/api/assignments";
   // uri_rendu = "http://localhost:8010/api/rendu"
   // uri_nonrendu = "http://localhost:8010/api/nonrendu"
-  
    uri = "https://backend2021.herokuapp.com/api/assignments"
    uri_rendu = "https://backend2021.herokuapp.com/api/rendu"
    uri_nonrendu = "https://backend2021.herokuapp.com/api/nonrendu"
@@ -71,7 +74,10 @@ export class AssignmentsService {
     return this.http.get<Assignment>(this.uri + "/" + id).pipe(
       // traitement 1
       map((a) => {
-        a.nom += " MODIFIE PAR MAP";
+        // a.nom += " MODIFIE PAR MAP";
+        console.log("Dans MAP");
+        console.log(a);
+        console.log("Sortie de map")
         return a;
       }),
       tap((a) => {
@@ -105,6 +111,12 @@ export class AssignmentsService {
 
   addAssignment(assignment: Assignment): Observable<any> {
     assignment.id = this.generateId();
+    console.log("Id de l'assignment inséré :"+assignment.id);
+    async () => {
+      let matieres = await this.matiereService.getMatieres();
+      console.log("Getting matieres")
+      console.log(matieres)
+    }
     //this.loggingService.log(assignment.nom, " a été ajouté");
 
     /*this.assignments.push(assignment);
@@ -185,5 +197,11 @@ export class AssignmentsService {
       });
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
+  }
+
+  populateDB(): Observable<any> {
+    // this.http.get(this.uri.)
+    console.log("assignement service: populating db")
+    return this.http.get(this.uri+"/populatedb")
   }
 }

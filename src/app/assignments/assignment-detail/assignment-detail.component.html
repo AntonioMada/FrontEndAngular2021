@@ -1,19 +1,33 @@
 <div class="container">
   <mat-card *ngIf="assignmentTransmis">
-    <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-    <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
-    <div id="bottom">
-      <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-        Rendu
-      </mat-checkbox>
-      <nav>
-
+    <!-- <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title> -->
+    <mat-card-header>
+      <div mat-card-avatar style="background-size: cover;background-image: url('https://i1.rgstatic.net/ii/profile.image/712495153029121-1546883490651_Q512/Michel-Buffa.jpg');"> </div>
+      <mat-card-title>Devoir de {{assignmentTransmis.matiere[0].nom}}</mat-card-title>      
+      <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+      <!-- <mat-card-title>{{assignmentTransmis.matiere[0].nom_prof}}</mat-card-title> -->
+      <mat-card-subtitle *ngIf="assignmentTransmis.rendu">Note : {{assignmentTransmis.note}}/20</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h3 mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</h3>
+      <mat-list>
+        <mat-list-item>Nom : {{assignmentTransmis.nom}} </mat-list-item>
+        <mat-list-item>Eleve : {{assignmentTransmis.auteur}}</mat-list-item>
+        <mat-list-item>Remarque : {{assignmentTransmis.remarques}}</mat-list-item>
+  
+        <!-- <mat-list-item><a routerLink="/assignment/{{assignment.id}}">Detail </a></mat-list-item>  -->
+      </mat-list>
+    </mat-card-content>
+    <mat-card-action>
+      <div id="bottom">
+        <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+          Rendu
+        </mat-checkbox>
+        <nav>
           <button [disabled]="!isAdmin()" mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
-
-      </nav>
-
-
-      <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
-    </div>
+        </nav>        
+        <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
+      </div>
+    </mat-card-action>
   </mat-card>
 </div>

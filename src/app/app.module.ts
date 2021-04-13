@@ -54,13 +54,17 @@ const routes:Routes = [
     path:"assignment/:id",
     component:AssignmentDetailComponent
   },  
-  {
-    path:"assignment/:id",
-    component:AssignmentDetailComponent
-  },
+  // {
+  //   path:"assignment/:id",
+  //   component:AssignmentDetailComponent
+  // },
   {
     path:"login",
     component:UserComponent
+  },
+  {
+    path:"assignment/:id/edit",
+    component:EditAssigmentComponent
   }
 ]
 @NgModule({
