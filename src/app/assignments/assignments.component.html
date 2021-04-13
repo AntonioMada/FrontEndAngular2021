@@ -59,52 +59,7 @@
       </mat-list>
     </cdk-virtual-scroll-viewport> -->
     <mat-grid-list cols="2" rowHeight="600px">
-      <div class="example-container">
-
-        <mat-grid-tile>
-          <cdk-virtual-scroll-viewport #scrollerrendu itemSize="150" class="example-viewport">
-            <mat-divider></mat-divider>
-            <div
-              cdkDropList
-              #rendudroplist="cdkDropList"
-              [cdkDropListData]="assignmentsrendu"
-              [cdkDropListConnectedTo]="[nonrendudroplist]"
-              class="example-list"
-              id="rendulist"
-              (cdkDropListDropped)="drop($event)">
-              <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
-              <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag [cdkDragData]="a">
-                <nav>                    
-                  <mat-list-item class="example-item">
-          
-                  <div appNonRendu class="card-container">
-                    <mat-card class="rendu-card">
-                      <mat-card-title>Devoir de {{a.matiere[0].nom}}</mat-card-title>      
-                      <mat-card-header>
-                        <div mat-card-avatar style="background-size: cover;background-image: url('https://i1.rgstatic.net/ii/profile.image/712495153029121-1546883490651_Q512/Michel-Buffa.jpg');"> 
-                        </div>
-                        <mat-card-title>{{a.matiere[0].nom_prof}}</mat-card-title>
-                        <mat-card-subtitle>Note : {{a.note}}/20</mat-card-subtitle>
-                      </mat-card-header>
-                      <mat-card-content>
-                        <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
-                        <mat-list>
-                            <mat-list-item>Nom : {{a.nom}} </mat-list-item>
-                          <mat-list-item>Eleve : {{a.auteur}}</mat-list-item>
-                    
-                          <mat-list-item><a routerLink="/assignment/{{a.id}}">detail </a></mat-list-item> 
-                        </mat-list>
-                      </mat-card-content>
-                    </mat-card>
-                  </div>
       
-                </mat-list-item>
-                </nav>
-              </mat-list>
-            </div>
-          </cdk-virtual-scroll-viewport>
-        </mat-grid-tile>
-      </div>
 
       <div class="example-container">
         <mat-grid-tile>
@@ -130,7 +85,7 @@
                           <mat-card-header>
                             <div mat-card-avatar class="example-header-image"></div>
                             <mat-card-title>{{a.matiere[0].nom_prof}}</mat-card-title>
-                            <mat-card-subtitle>Note : {{a.note}}/20</mat-card-subtitle>
+                            <!-- <mat-card-subtitle>Note : {{a.note}}/20</mat-card-subtitle> -->
                           </mat-card-header>
                           <mat-card-content>
                             <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
@@ -138,7 +93,7 @@
                                 <mat-list-item>Nom : {{a.nom}} </mat-list-item>
                               <mat-list-item>Eleve : {{a.auteur}}</mat-list-item>
                         
-                              <mat-list-item><a routerLink="/assignment/{{a.id}}">detail </a></mat-list-item> 
+                              <mat-list-item><a routerLink="/assignment/{{a.id}}">Detail </a></mat-list-item> 
                             </mat-list>
                           </mat-card-content>
                         </mat-card>
@@ -147,6 +102,52 @@
                     </mat-list-item>
                 </nav>
               </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </mat-grid-tile>
+      </div>
+      <div class="example-container">
+
+        <mat-grid-tile>
+          <cdk-virtual-scroll-viewport #scrollerrendu itemSize="150" class="example-viewport">
+            <mat-divider></mat-divider>
+            <div
+              cdkDropList
+              #rendudroplist="cdkDropList"
+              [cdkDropListData]="assignmentsrendu"
+              [cdkDropListConnectedTo]="[nonrendudroplist]"
+              class="example-list"
+              id="rendulist"
+              (cdkDropListDropped)="drop($event)">
+              <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
+              <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag [cdkDragData]="a">
+                <nav>                    
+                  <mat-list-item class="example-item">
+          
+                  <div appNonRendu class="card-container">
+                    <mat-card class="rendu-card">
+                      <mat-card-title>Devoir de {{a.matiere[0].nom}}</mat-card-title>      
+                      <mat-card-header>
+                        <div mat-card-avatar style="background-size: cover;background-image: url('https://i1.rgstatic.net/ii/profile.image/712495153029121-1546883490651_Q512/Michel-Buffa.jpg');"> 
+                        </div>
+                        <mat-card-title>{{a.matiere[0].nom_prof}}</mat-card-title>
+                        <!-- <mat-card-subtitle>Note : {{a.note}}/20</mat-card-subtitle> -->
+                      </mat-card-header>
+                      <mat-card-content>
+                        <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+                        <mat-list>
+                            <mat-list-item>Nom : {{a.nom}} </mat-list-item>
+                          <mat-list-item>Eleve : {{a.auteur}}</mat-list-item>
+                    
+                          <mat-list-item><a routerLink="/assignment/{{a.id}}">Detail </a></mat-list-item> 
+                        </mat-list>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+      
+                </mat-list-item>
+                </nav>
+              </mat-list>
             </div>
           </cdk-virtual-scroll-viewport>
         </mat-grid-tile>

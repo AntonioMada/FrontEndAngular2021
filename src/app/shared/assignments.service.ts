@@ -70,7 +70,10 @@ export class AssignmentsService {
     return this.http.get<Assignment>(this.uri + "/" + id).pipe(
       // traitement 1
       map((a) => {
-        a.nom += " MODIFIE PAR MAP";
+        // a.nom += " MODIFIE PAR MAP";
+        console.log("Dans MAP");
+        console.log(a);
+        console.log("Sortie de map")
         return a;
       }),
       tap((a) => {

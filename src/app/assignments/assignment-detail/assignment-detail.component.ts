@@ -11,7 +11,7 @@ import { Assignment } from '../assignment.model';
 })
 export class AssignmentDetailComponent implements OnInit {
   // passé sous forme d'attribut HTML
-  assignmentTransmis: Assignment;
+  assignmentTransmis: any;
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -21,8 +21,10 @@ export class AssignmentDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
+    if(localStorage.getItem('token')==null){
+      alert("vous n'avez pas de tokken,veillez vous connecter");
+      this.router.navigate(["/login"]);
+    }
     this.getAssignmentById();
   }
 
@@ -34,6 +36,7 @@ export class AssignmentDetailComponent implements OnInit {
     console.log('Dans ngOnInit de details, id = ' + id);
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignmentTransmis = assignment;
+      console.log(this.assignmentTransmis);
     });
   }
 
