@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
+import { Matiere } from '../model/matiere.model';
+import { MatieresService } from "../../shared/matieres.service";
+
 
 @Component({
   selector: 'app-edit-assigment',
@@ -10,13 +13,16 @@ import { Assignment } from '../assignment.model';
 })
 export class EditAssigmentComponent implements OnInit {
   assignment:Assignment;
-
+  matieres:Matiere[];
   // pour le formulaire
   nom = "";
   dateDeRendu = null;
+  id_matiere: number;
+  remarques = "";
 
   constructor(
     private assignmentsService: AssignmentsService,
+    private matieresService: MatieresService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -32,6 +38,13 @@ export class EditAssigmentComponent implements OnInit {
     console.log(this.route.snapshot.fragment);
 
     this.getAssignmentById();
+    this.getMatieres()
+  }
+
+  getMatieres(){
+    this.matieresService.getMatieres().subscribe(data=>{
+      this.matieres = data
+    })
   }
 
   getAssignmentById() {
@@ -42,9 +55,10 @@ export class EditAssigmentComponent implements OnInit {
     console.log('Dans ngOnInit de details, id = ' + id);
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignment = assignment;
-
+      this.id_matiere = assignment.id_matiere;
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
+      this.remarques = assignment.remarques as string;
     });
   }
 
@@ -54,9 +68,11 @@ export class EditAssigmentComponent implements OnInit {
     this.router.navigate(["/login"]);}
     // on va modifier l'assignment
     if((!this.nom) || (!this.dateDeRendu)) return;
-
     this.assignment.nom = this.nom;
     this.assignment.dateDeRendu = this.dateDeRendu;
+    console.log("Id matiere en cours:" + this.assignment.id_matiere);
+    this.assignment.id_matiere = this.id_matiere;
+    this.assignment.remarques = this.remarques;
 
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {

@@ -5,15 +5,19 @@ import { catchError, filter, map, tap } from "rxjs/operators";
 import { Assignment } from "../assignments/assignment.model";
 import { LoggingService } from "./logging.service";
 import { assignmentsGeneres } from "./datamock";
+import { Matiere } from "../assignments/model/matiere.model";
+import { MatieresService } from "./matieres.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AssignmentsService {
-  assignments: Assignment[];
+  // assignments: Assignment[];
+  
 
   constructor(
     private loggingService: LoggingService,
+    private matiereService: MatieresService,
     private http: HttpClient
   ) {}
 
@@ -107,6 +111,12 @@ export class AssignmentsService {
 
   addAssignment(assignment: Assignment): Observable<any> {
     assignment.id = this.generateId();
+    console.log("Id de l'assignment inséré :"+assignment.id);
+    async () => {
+      let matieres = await this.matiereService.getMatieres();
+      console.log("Getting matieres")
+      console.log(matieres)
+    }
     //this.loggingService.log(assignment.nom, " a été ajouté");
 
     /*this.assignments.push(assignment);

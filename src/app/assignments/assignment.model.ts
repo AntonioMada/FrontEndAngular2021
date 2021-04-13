@@ -8,4 +8,5 @@ export class Assignment {
   note:number;
   auteur:string;
   remarques:String;
+  matiere:Object;
 }
