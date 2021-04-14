@@ -21,8 +21,8 @@ import { Router } from '@angular/router';
       this.dialog.close();
     }
     submit(assignment:Assignment) {
-       
        console.log(this.note);
+       this.dialog.close();
        this.assignment=assignment;
       if(assignment.rendu){
         this.assignment.note=null;
@@ -35,9 +35,7 @@ import { Router } from '@angular/router';
       };
       this.assignmentsService.updateAssignment(this.assignment)
          .subscribe(message => {
-          this.dialog.close();
           window.location.reload();
-          alert(this.rendus);
           console.log(message);
          })
     }
