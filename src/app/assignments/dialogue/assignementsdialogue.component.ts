@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AssignmentsService } from "../../shared/assignments.service";
 import { Assignment } from "../assignment.model";
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
     selector: 'assignements.dialogue',
     templateUrl: 'assignements.dialogue.html',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
     note=0;
     assignment:Assignment;
     rendus="";
-    constructor(
+    constructor(private _snackBar: MatSnackBar,
       private assignmentsService: AssignmentsService,private router:Router,
       public dialog: MatDialogRef<assignementsDialogue>,@Inject(MAT_DIALOG_DATA) public data) {
     }
@@ -36,7 +37,7 @@ import { Router } from '@angular/router';
       this.assignmentsService.updateAssignment(this.assignment)
          .subscribe(message => {
           window.location.reload();
-          console.log(message);
+          this._snackBar.open('assignments modifié','ok');
          })
     }
 }
