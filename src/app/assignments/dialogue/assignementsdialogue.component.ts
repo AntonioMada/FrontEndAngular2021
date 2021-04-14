@@ -37,7 +37,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
       this.assignmentsService.updateAssignment(this.assignment)
          .subscribe(message => {
           window.location.reload();
-          this._snackBar.open('assignments modifié','ok');
          })
+         this._snackBar.open('assignments modifié','ok');  
     }
 }
