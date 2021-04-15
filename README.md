@@ -28,18 +28,18 @@ en localhost
 Vous atterirez sur la page de login(des exmples d'utilisateurs seront cités plus bas)
 
 ## Accueil
-Sur la page d'accueil, tout en haut se trouve le nom de l'application, il pourra être cliqué à tout moment pour revenir à la page d'accueil.
-Le bouton Peupler BD permet d'insérer 500 données dans la base de données avec des variables aléatoires
+Sur la page d'accueil, tout en haut se trouve le nom de l'application, il pourra être cliqué à tout moment pour revenir à la page d'accueil.__
+Le bouton Peupler BD permet d'insérer 500 données dans la base de données avec des variables aléatoires__
 
 Deux containers se présentent après les boutons : 
 - Le container se trouvant à gauche contient la liste des assignments non rendus
-- Le container se troucant à droite contient la liste des assignments rendus
+- Le container se trouvant à droite contient la liste des assignments rendus
 
 
-Pour rendre un assignment non rendu > rendu, il faut glisser l'assignment voulu vers le container à droite,
-Pour rendre un assignment rendu > non rendu, il faut glisser l'assignment voulu vers le container à gauche,
-Un Dialog pour confirmer l'action se montrera dans les deux cas.
-Dans le cas de non rendu > rendu, il faut saisir la note correspondante.
+Pour rendre un assignment non rendu > rendu, il faut glisser l'assignment voulu vers le container à droite,__
+Pour rendre un assignment rendu > non rendu, il faut glisser l'assignment voulu vers le container à gauche,__
+Un Dialog pour confirmer l'action se montrera dans les deux cas.__
+Dans le cas de non rendu > rendu, il faut saisir la note correspondante.__
 
 Chaque Card montrant un assignment contient un bouton Détail, le détail vous ramènera à la page de détails de l'assignment correspondant.
 
