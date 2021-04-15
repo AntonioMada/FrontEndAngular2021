@@ -4,7 +4,11 @@
   <mat-form-field>
     <input matInput placeholder="Nom du devoir" required [(ngModel)]="nom" name="nom">
   </mat-form-field>
-
+  
+  <mat-form-field>
+    <input matInput type="number" placeholder="Nom du devoir" required [(ngModel)]="note" name="note">
+  </mat-form-field>
+  
   <mat-form-field appearance="fill">
     <mat-label>Choisissez une date</mat-label>
     <input matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="date">

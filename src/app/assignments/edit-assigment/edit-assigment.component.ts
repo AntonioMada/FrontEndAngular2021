@@ -24,6 +24,7 @@ export class EditAssigmentComponent implements OnInit {
   id_matiere: number;
   remarques = "";
   isAdmin : boolean;
+  note: number;
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -76,7 +77,9 @@ export class EditAssigmentComponent implements OnInit {
       this.id_matiere = assignment.id_matiere;
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
+      this.note = assignment.note;
       this.remarques = assignment.remarques as string;
+      
     });
   }
 
@@ -91,6 +94,7 @@ export class EditAssigmentComponent implements OnInit {
     console.log("Id matiere en cours:" + this.assignment.id_matiere);
     this.assignment.id_matiere = this.id_matiere;
     this.assignment.remarques = this.remarques;
+    this.assignment.note = this.note;
 
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {
