@@ -41,6 +41,9 @@ Deux containers se présentent après les boutons :
 
 Chaque Card montrant un assignment contient un bouton Détail, le détail vous ramènera à la page de détails de l'assignment correspondant.
 
+## Recherche
+Recherche simple de nom d'assignements
+
 ## Detail
 Dans la page détails se trouve le même header que l'accueil qui va être suivi des détails de l'assignment
 Après les détails se trouve le bouton Edit qui n'est actif que si l'utilisateur connecté est Admin
