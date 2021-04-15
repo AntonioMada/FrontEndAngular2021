@@ -21,12 +21,12 @@ export class AssignmentsService {
     private http: HttpClient
   ) {}
 
-  uri = "http://localhost:8010/api/assignments";
-  uri_rendu = "http://localhost:8010/api/rendu"
-  uri_nonrendu = "http://localhost:8010/api/nonrendu"
-  //  uri = "https://backend2021.herokuapp.com/api/assignments"
-  //  uri_rendu = "https://backend2021.herokuapp.com/api/rendu"
-  //  uri_nonrendu = "https://backend2021.herokuapp.com/api/nonrendu"
+  //  uri = "http://localhost:8010/api/assignments";
+  //  uri_rendu = "http://localhost:8010/api/rendu"
+  //  uri_nonrendu = "http://localhost:8010/api/nonrendu"
+   uri = "https://backend2021.herokuapp.com/api/assignments"
+   uri_rendu = "https://backend2021.herokuapp.com/api/rendu"
+   uri_nonrendu = "https://backend2021.herokuapp.com/api/nonrendu"
 
   getAssignments(): Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...");
@@ -34,20 +34,20 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.uri);
   }
 
-  getAssignmentsRendu(page: number, limit: number): Observable<any>{
+  getAssignmentsRendu(search,page: number, limit: number): Observable<any>{
     console.log("Dans le service de gestion des assignments rendus...");
     //return of(this.assignments);
     var val = this.http.get<Assignment[]>(
-      this.uri_rendu + "?page=" + page + "&limit=" + limit
+      this.uri_rendu + "?page=" + page + "&limit=" + limit+" &search=" +search
     )
     return val; 
   }
 
-  getAssignmentsNonRendu(page: number, limit: number): Observable<any>{
+  getAssignmentsNonRendu(search,page: number, limit: number): Observable<any>{
     console.log("Dans le service de gestion des assignments non rendus...");
     //return of(this.assignments);
     return this.http.get<Assignment[]>(
-      this.uri_nonrendu + "?page=" + page + "&limit=" + limit
+      this.uri_nonrendu + "?page=" + page + "&limit=" + limit+ "&search=" +search
     );
   }
 
