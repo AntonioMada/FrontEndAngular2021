@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
+import { LoginService } from "../../shared/login.service"
+
 
 import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
@@ -13,18 +15,24 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class AssignmentDetailComponent implements OnInit {
   // passé sous forme d'attribut HTML
   assignmentTransmis: any;
+  isAdmin: boolean;
 
   constructor(private _snackBar: MatSnackBar,
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService:AuthService
+    private authService:AuthService,
+    private loginService: LoginService,
   ) {}
 
   ngOnInit(): void {
     if(localStorage.getItem('token')==null){
       this._snackBar.open('message');
-    this.router.navigate(["/login"]);}
+      this.router.navigate(["/login"]);
+    }
+    this.loginService.check().subscribe((user)=> {
+      this.isAdmin = user.isAdmin;
+    })
     this.getAssignmentById();
   }
 
@@ -69,17 +77,20 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   onClickEdit() {
-    this.router.navigate(['/assignment', this.assignmentTransmis.id, 'edit'], {
-      queryParams: {
-        nom:'Michel Buffa',
-        metier:"Professeur",
-        responsable:"MIAGE"
-      },
-      fragment:"edition"
-    });
+    console.log("Edit clicked");
+    this.router.navigate(['/assignment', this.assignmentTransmis.id, 'edit'], 
+      // {
+      //   queryParams: {
+      //     nom:'Michel Buffa',
+      //     metier:"Professeur",
+      //     responsable:"MIAGE"
+      //   },
+      //   fragment:"edition"
+      // }
+    );
   }
 
-  isAdmin() {
-    return this.authService.admin;
-  }
+  // isAdmin() {
+  //   return this.authService.admin;
+  // }
 }

@@ -26,15 +26,14 @@ export class LoginService {
       })
     );
   }
+
   check():Observable<any>{
     const body = { 'token': localStorage.getItem('token') };
     console.log(localStorage.getItem('token'));
     
     return this.http.post(this.uritoken, body);
-     
   }
+
   logOut() {
   }
-
-
 }

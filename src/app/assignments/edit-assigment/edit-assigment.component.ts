@@ -4,6 +4,10 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import { Matiere } from '../model/matiere.model';
 import { MatieresService } from "../../shared/matieres.service";
+import { LoginService } from "../../shared/login.service"
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { AngularFaviconService } from 'angular-favicon';
+
 
 
 @Component({
@@ -19,20 +23,34 @@ export class EditAssigmentComponent implements OnInit {
   dateDeRendu = null;
   id_matiere: number;
   remarques = "";
+  isAdmin : boolean;
 
   constructor(
     private assignmentsService: AssignmentsService,
     private matieresService: MatieresService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {}
 
   ngOnInit(): void {
-    if(localStorage.getItem('token')==null){alert("vous n'avez pas de tokken,veillez vous connecter");
-    this.router.navigate(["/login"]);}
+
+    // this.loginService.check().subscribe((user)=> {
+    //   this.isAdmin = user.isAdmin;
+    // })
+    
+    // if(localStorage.getItem('token')==null || !this.isAdmin){alert("vous n'avez pas de tokken,veillez vous connecter");
+    // this.router.navigate(["/login"]);}
+
     // ici on montre comment on peut récupérer les parametres http
     // par ex de :
     // http://localhost:4200/assignment/1/edit?nom=Michel%20Buffa&metier=Professeur&responsable=MIAGE#edition
+
+    if (localStorage.getItem("token") == null) {
+      this.router.navigate(["/login"]);
+      this._snackBar.open("veillez vous connectez", "ok");
+    }
 
     console.log(this.route.snapshot.queryParams);
     console.log(this.route.snapshot.fragment);
@@ -52,7 +70,7 @@ export class EditAssigmentComponent implements OnInit {
     // en number en mettant un "+" devant
     const id: number = +this.route.snapshot.params.id;
 
-    console.log('Dans ngOnInit de details, id = ' + id);
+    console.log('Dans ngOnInit de Edit, id = ' + id);
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignment = assignment;
       this.id_matiere = assignment.id_matiere;

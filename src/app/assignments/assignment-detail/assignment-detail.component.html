@@ -2,7 +2,9 @@
   <mat-card *ngIf="assignmentTransmis">
     <!-- <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title> -->
     <mat-card-header>
-      <div mat-card-avatar style="background-size: cover;background-image: url('https://i1.rgstatic.net/ii/profile.image/712495153029121-1546883490651_Q512/Michel-Buffa.jpg');"> </div>
+      <!-- <div mat-card-avatar style="background-size: cover;background-image: url('https://i1.rgstatic.net/ii/profile.image/712495153029121-1546883490651_Q512/Michel-Buffa.jpg');"> </div> -->
+      <div mat-card-avatar style="background-size: cover;background-image: url('{{assignmentTransmis.matiere[0].Image}}');"> </div>
+
       <mat-card-title>Devoir de {{assignmentTransmis.matiere[0].nom}}</mat-card-title>      
       <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
       <!-- <mat-card-title>{{assignmentTransmis.matiere[0].nom_prof}}</mat-card-title> -->
@@ -20,11 +22,11 @@
     </mat-card-content>
     <mat-card-action>
       <div id="bottom">
-        <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+        <!-- <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
           Rendu
-        </mat-checkbox>
+        </mat-checkbox> -->
         <nav>
-          <button [disabled]="!isAdmin()" mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
+          <button [disabled]="!isAdmin" mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
         </nav>        
         <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
       </div>

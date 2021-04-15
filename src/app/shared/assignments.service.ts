@@ -70,30 +70,30 @@ export class AssignmentsService {
     //let assignementCherche = this.assignments.find(a => a.id === id);
 
     //return of(assignementCherche);
-
-    return this.http.get<Assignment>(this.uri + "/" + id).pipe(
-      // traitement 1
-      map((a) => {
-        // a.nom += " MODIFIE PAR MAP";
-        console.log("Dans MAP");
-        console.log(a);
-        console.log("Sortie de map")
-        return a;
-      }),
-      tap((a) => {
-        console.log("TRACE DANS TAP : j'ai reçu " + a.nom);
-      }),
-      /*
-      filter(a => {
-        return (a.rendu)
-      })
-      */
-      catchError(
-        this.handleError<any>(
-          "### catchError: getAssignments by id avec id=" + id
-        )
-      )
-    );
+    return this.http.get<Assignment>(this.uri + "/" + id)
+    // return this.http.get<Assignment>(this.uri + "/" + id).pipe(
+    //   // traitement 1
+    //   map((a) => {
+    //     // a.nom += " MODIFIE PAR MAP";
+    //     console.log("Dans MAP");
+    //     console.log(a);
+    //     console.log("Sortie de map")
+    //     return a;
+    //   }),
+    //   tap((a) => {
+    //     console.log("TRACE DANS TAP : j'ai reçu " + a.nom);
+    //   }),
+    //   /*
+    //   filter(a => {
+    //     return (a.rendu)
+    //   })
+    //   */
+    //   catchError(
+    //     this.handleError<any>(
+    //       "### catchError: getAssignments by id avec id=" + id
+    //     )
+    //   )
+    // );
   }
 
   private handleError<T>(operation: any, result?: T) {

@@ -20,13 +20,12 @@ export class MatieresService {
   ) {}
 
   
-  // uri = "http://localhost:8010/api/matieres"
-  //uri_assigns = "http://backend2021.herokuapp.com/api/assignments";
-  uri = "https://backend2021.herokuapp.com/api/matieres"
+  uri = "http://localhost:8010/api/matieres"
+  // uri = "https://backend2021.herokuapp.com/api/matieres"
 
 
   getMatieres(): Observable<Matiere[]> {
-    console.log("Dans le service de gestion des assignments...");
+    console.log("Dans le service de gestion des matières...");
     return this.http.get<Matiere[]>(this.uri);
   }
 }
