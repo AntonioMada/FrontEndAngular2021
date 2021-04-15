@@ -18,6 +18,7 @@ export class AddAssignmentComponent implements OnInit {
   dateDeRendu = null;
   id_matiere: number;
   remarques = "";
+  auteur =""
 
   constructor(
     private assignmentsService:AssignmentsService,
@@ -44,6 +45,7 @@ export class AddAssignmentComponent implements OnInit {
     nouvelAssignment.dateDeRendu = this.dateDeRendu;
     nouvelAssignment.rendu = false;
     nouvelAssignment.remarques = this.remarques;
+    nouvelAssignment.auteur = this.auteur;
     this.matieres.forEach(e => {
       if(e.id == this.id_matiere) {
         nouvelAssignment.matiere = e._id

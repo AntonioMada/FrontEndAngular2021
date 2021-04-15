@@ -1,14 +1,11 @@
 <main class="container">
   <a routerLink="/add" class="ajouterBtn">
-    <button mat-flat-button color="accent">
-      Ajouter un assignment
-    </button>
+    <button mat-flat-button color="accent">Ajouter un assignment</button>
   </a>
   <h1>Liste des assignments (scrolling infini)</h1>
   <mat-divider></mat-divider>
-  
+
   <div layout="row">
-    
     <!-- <cdk-virtual-scroll-viewport #scroller itemSize="150" class="example-viewport">
       <mat-divider></mat-divider>
       <mat-list *cdkVirtualFor="let a of assignments">
@@ -58,19 +55,28 @@
         </nav>
       </mat-list>
     </cdk-virtual-scroll-viewport> -->
-    <form (ngSubmit) = "searchs($event); ">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="nom matiere"  [(ngModel)]="search" name="search">
-        </mat-form-field>
-        
-        <button mat-stroked-button color="accent" class="btn-block">search</button>
+    <form (ngSubmit)="searchs($event)">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="nom matiere"
+          [(ngModel)]="search"
+          name="search"
+        />
+      </mat-form-field>
+
+      <button mat-stroked-button color="accent" class="btn-block">
+        search
+      </button>
     </form>
     <mat-grid-list cols="2" rowHeight="600px">
-      
-
       <div class="example-container">
         <mat-grid-tile>
-          <cdk-virtual-scroll-viewport #scrollernonrendu itemSize="150" class="example-viewport">
+          <cdk-virtual-scroll-viewport
+            #scrollernonrendu
+            itemSize="150"
+            class="example-viewport"
+          >
             <mat-divider></mat-divider>
             <div
               cdkDropList
@@ -79,43 +85,88 @@
               [cdkDropListConnectedTo]="[rendudroplist]"
               class="example-list"
               id="nonrendulist"
-
-              (cdkDropListDropped)="drop($event)">
+              (cdkDropListDropped)="drop($event)"
+            >
               <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
-              <div *cdkVirtualFor="let a of assignmentsnonrendu" class="example-box" cdkDrag [cdkDragData]="a">
-                <nav>
+              <div *ngIf="noAssignmentsNonRendu; else thereIsNonRendu">
+                <div class="example-box">
+                  <nav>
                     <mat-list-item class="example-item">
-          
                       <div appNonRendu class="card-container">
                         <mat-card class="rendu-card">
-                          <mat-card-title>Devoir de {{a.matiere[0].nom}}</mat-card-title>      
-                          <mat-card-header>
-                            <div mat-card-avatar style="background-size: cover;background-image: url('{{a.matiere[0].Image}}');"> </div>
-                            <mat-card-title>{{a.matiere[0].nom_prof}}</mat-card-title>
-                          </mat-card-header>
+                          <mat-card-title
+                            >Pas de résultat</mat-card-title
+                          >
+                          <mat-card-header>Pas à rendre</mat-card-header>
                           <mat-card-content>
-                            <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
+                            <h3 mat-card-subtitle> </h3>
                             <mat-list>
-                                <mat-list-item>Nom : {{a.nom}} </mat-list-item>
-                              <mat-list-item>Eleve : {{a.auteur}}</mat-list-item>
-                        
-                              <mat-list-item><a routerLink="/assignment/{{a.id}}">Detail </a></mat-list-item> 
+                              <mat-list-item>Nom : </mat-list-item>
+                              <mat-list-item>Eleve : </mat-list-item>
                             </mat-list>
                           </mat-card-content>
                         </mat-card>
                       </div>
-          
                     </mat-list-item>
-                </nav>
+                  </nav>  
+                </div>
               </div>
+              <ng-template #thereIsNonRendu>
+
+                <div
+                  *cdkVirtualFor="let a of assignmentsnonrendu"
+                  class="example-box"
+                  cdkDrag
+                  [cdkDragData]="a"
+                >
+                  <nav>
+                    <mat-list-item class="example-item">
+                      <div appNonRendu class="card-container">
+                        <mat-card class="rendu-card">
+                          <mat-card-title
+                            >Devoir de {{ a.matiere[0].nom }}</mat-card-title
+                          >
+                          <mat-card-header>
+                            <div
+                              mat-card-avatar
+                              style="background-size: cover;background-image: url('{{a.matiere[0].Image}}');"
+                            ></div>
+                            <mat-card-title>{{
+                              a.matiere[0].nom_prof
+                            }}</mat-card-title>
+                          </mat-card-header>
+                          <mat-card-content>
+                            <h3 mat-card-subtitle>{{ a.dateDeRendu | date }}</h3>
+                            <mat-list>
+                              <mat-list-item>Nom : {{ a.nom }} </mat-list-item>
+                              <mat-list-item
+                                >Eleve : {{ a.auteur }}</mat-list-item
+                              >
+  
+                              <mat-list-item
+                                ><a routerLink="/assignment/{{ a.id }}"
+                                  >Detail
+                                </a></mat-list-item
+                              >
+                            </mat-list>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                    </mat-list-item>
+                  </nav>
+                </div>
+              </ng-template>
             </div>
           </cdk-virtual-scroll-viewport>
         </mat-grid-tile>
       </div>
       <div class="example-container">
-
         <mat-grid-tile>
-          <cdk-virtual-scroll-viewport #scrollerrendu itemSize="150" class="example-viewport">
+          <cdk-virtual-scroll-viewport
+            #scrollerrendu
+            itemSize="150"
+            class="example-viewport"
+          >
             <mat-divider></mat-divider>
             <div
               cdkDropList
@@ -124,35 +175,79 @@
               [cdkDropListConnectedTo]="[nonrendudroplist]"
               class="example-list"
               id="rendulist"
-              (cdkDropListDropped)="drop($event)">
-              <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag [cdkDragData]="a">
-                <nav>                    
-                  <mat-list-item class="example-item">
-          
-                  <div appNonRendu class="card-container">
-                    <mat-card class="rendu-card">
-                      <mat-card-title>Devoir de {{a.matiere[0].nom}}</mat-card-title>      
-                      <mat-card-header>
-                        <div mat-card-avatar style="background-size: cover;background-image: url('{{a.matiere[0].Image}}');"> 
-                        </div>
-                        <mat-card-title>{{a.matiere[0].nom_prof}}</mat-card-title>
-                        <!-- <mat-card-subtitle>Note : {{a.note}}/20</mat-card-subtitle> -->
-                      </mat-card-header>
-                      <mat-card-content>
-                        <h3 mat-card-subtitle>{{a.dateDeRendu | date}}</h3>
-                        <mat-list>
-                            <mat-list-item>Nom : {{a.nom}} </mat-list-item>
-                          <mat-list-item>Eleve : {{a.auteur}}</mat-list-item>
-                    
-                          <mat-list-item><a routerLink="/assignment/{{a.id}}">Detail </a></mat-list-item> 
-                        </mat-list>
-                      </mat-card-content>
-                    </mat-card>
-                  </div>
-      
-                </mat-list-item>
-                </nav>
-              </mat-list>
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div *ngIf="noAssignmentsRendu; else thereIsRendu">
+                <div class="example-box">
+
+                  <nav>
+                    <mat-list-item class="example-item">
+                      <div appNonRendu class="card-container">
+                        <mat-card class="rendu-card">
+                          <mat-card-title
+                            >Pas de résultat</mat-card-title
+                          >
+                          <mat-card-header>Pas à rendre</mat-card-header>
+                          <mat-card-content>
+                            <h3 mat-card-subtitle> </h3>
+                            <mat-list>
+                              <mat-list-item>Nom : </mat-list-item>
+                              <mat-list-item>Eleve : </mat-list-item>
+                            </mat-list>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                    </mat-list-item>
+                  </nav>
+                </div>
+              </div>
+              <ng-template #thereIsRendu>
+
+                <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
+                <mat-list
+                  class="example-box"
+                  *cdkVirtualFor="let a of assignmentsrendu"
+                  cdkDrag
+                  [cdkDragData]="a"
+                >
+                  <nav>
+                    <mat-list-item class="example-item">
+                      <div appRendu class="card-container">
+                        <mat-card class="rendu-card">
+                          <mat-card-title
+                            >Devoir de {{ a.matiere[0].nom }}</mat-card-title
+                          >
+                          <mat-card-header>
+                            <div
+                              mat-card-avatar
+                              style="background-size: cover;background-image: url('{{a.matiere[0].Image}}');"
+                            ></div>
+                            <mat-card-title>{{
+                              a.matiere[0].nom_prof
+                            }}</mat-card-title>
+                            <!-- <mat-card-subtitle>Note : {{a.note}}/20</mat-card-subtitle> -->
+                          </mat-card-header>
+                          <mat-card-content>
+                            <h3 mat-card-subtitle>{{ a.dateDeRendu | date }}</h3>
+                            <mat-list>
+                              <mat-list-item>Nom : {{ a.nom }} </mat-list-item>
+                              <mat-list-item
+                                >Eleve : {{ a.auteur }}</mat-list-item
+                              >
+  
+                              <mat-list-item
+                                ><a routerLink="/assignment/{{ a.id }}"
+                                  >Detail
+                                </a></mat-list-item
+                              >
+                            </mat-list>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                    </mat-list-item>
+                  </nav>
+                </mat-list>
+              </ng-template>
             </div>
           </cdk-virtual-scroll-viewport>
         </mat-grid-tile>
@@ -160,4 +255,3 @@
     </mat-grid-list>
   </div>
 </main>
-  

@@ -25,6 +25,7 @@ export class EditAssigmentComponent implements OnInit {
   remarques = "";
   isAdmin : boolean;
   note: number;
+  auteur: string;
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -78,6 +79,7 @@ export class EditAssigmentComponent implements OnInit {
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
       this.note = assignment.note;
+      this.auteur = assignment.auteur;
       this.remarques = assignment.remarques as string;
       
     });
@@ -95,6 +97,7 @@ export class EditAssigmentComponent implements OnInit {
     this.assignment.id_matiere = this.id_matiere;
     this.assignment.remarques = this.remarques;
     this.assignment.note = this.note;
+    this.assignment.auteur = this.auteur;
 
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {

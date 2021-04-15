@@ -32,6 +32,8 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage: any = {};
   nextPage: any = {};
   newnote: number;
+  noAssignmentsRendu : boolean;
+  noAssignmentsNonRendu : boolean;
   // page: number = 1;
   // limit: number = 100;
   // totalDocs: number;
@@ -57,7 +59,8 @@ export class AssignmentsComponent implements OnInit {
       this.limit.rendu = 100;
       this.page.nonrendu = 1;
       this.limit.nonrendu = 100;
-      
+      this.noAssignmentsRendu = true;
+      this.noAssignmentsNonRendu = true;
   }
 
   ngOnInit() {
@@ -102,6 +105,8 @@ export class AssignmentsComponent implements OnInit {
     this.assignmentsService
       .getAssignmentsRendu(this.search,this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
+
+        this.noAssignmentsRendu = data.docs.length == 0 ? true : false; 
         this.assignmentsrendu = data.docs;
         this.page.rendu = data.page;
         this.limit.rendu = data.limit;
@@ -113,7 +118,7 @@ export class AssignmentsComponent implements OnInit {
         console.log("Check if données rendues reçues has next page:"+data.hasNextPage);
         console.log("Check if this has next page:"+ this.hasNextPage.rendu);
         this.nextPage.rendu = data.nextPage;
-        console.log(data);
+        console.log(data.docs);
         console.log("données rendues reçues");
       });
   }
@@ -122,6 +127,8 @@ export class AssignmentsComponent implements OnInit {
     this.assignmentsService
       .getAssignmentsNonRendu(this.search,this.page, this.limit)
       .subscribe((data) => {
+        this.noAssignmentsNonRendu = data.docs.length == 0 ? true : false; 
+        console.log("Rendu Status : "+this.noAssignmentsNonRendu);
         this.assignmentsnonrendu = data.docs;
         this.page.nonrendu = data.page;
         this.limit.nonrendu = data.limit;
@@ -265,44 +272,6 @@ export class AssignmentsComponent implements OnInit {
     });
   }
 
-  // premierePage() {
-  //   this.router.navigate(["/home"], {
-  //     queryParams: {
-  //       page: 1,
-  //       limit: this.limit,
-  //     },
-  //   });
-  // }
-
-  // pageSuivante() {
-  //   /*
-  //   this.page = this.nextPage;
-  //   this.getAssignments();*/
-  //   this.router.navigate(["/home"], {
-  //     queryParams: {
-  //       page: this.nextPage,
-  //       limit: this.limit,
-  //     },
-  //   });
-  // }
-
-  // pagePrecedente() {
-  //   this.router.navigate(["/home"], {
-  //     queryParams: {
-  //       page: this.prevPage,
-  //       limit: this.limit,
-  //     },
-  //   });
-  // }
-
-  // dernierePage() {
-  //   this.router.navigate(["/home"], {
-  //     queryParams: {
-  //       page: this.totalPages,
-  //       limit: this.limit,
-  //     },
-  //   });
-  // }
   searchs(event) {
    console.log(this.search);
    
