@@ -58,6 +58,13 @@
         </nav>
       </mat-list>
     </cdk-virtual-scroll-viewport> -->
+    <form (ngSubmit) = "searchs($event); ">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="nom matiere"  [(ngModel)]="search" name="search">
+        </mat-form-field>
+        
+        <button mat-stroked-button color="accent" class="btn-block">search</button>
+    </form>
     <mat-grid-list cols="2" rowHeight="600px">
       
 
@@ -119,7 +126,6 @@
               class="example-list"
               id="rendulist"
               (cdkDropListDropped)="drop($event)">
-              <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
               <mat-list class="example-box" *cdkVirtualFor="let a of assignmentsrendu" cdkDrag [cdkDragData]="a">
                 <nav>                    
                   <mat-list-item class="example-item">

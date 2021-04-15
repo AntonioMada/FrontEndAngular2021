@@ -24,6 +24,7 @@ export class AssignmentsComponent implements OnInit {
   assignementsDialogue:assignementsDialogue;
   page: any = {} ;
   limit: any = {} ;
+  search = ""
   totalDocs: any = {};
   totalPages: any = {};
   hasPrevPage: any = {};
@@ -99,7 +100,7 @@ export class AssignmentsComponent implements OnInit {
 
   getAssignmentsRendu() {
     this.assignmentsService
-      .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
+      .getAssignmentsRendu(this.search,this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
         this.assignmentsrendu = data.docs;
         this.page.rendu = data.page;
@@ -119,7 +120,7 @@ export class AssignmentsComponent implements OnInit {
 
   getAssignmentsNonRendu() {
     this.assignmentsService
-      .getAssignmentsNonRendu(this.page, this.limit)
+      .getAssignmentsNonRendu(this.search,this.page, this.limit)
       .subscribe((data) => {
         this.assignmentsnonrendu = data.docs;
         this.page.nonrendu = data.page;
@@ -137,7 +138,7 @@ export class AssignmentsComponent implements OnInit {
 
   getPlusDAssignmentsPourScrolling() {
     this.assignmentsService
-      .getAssignmentsRendu(this.page.rendu, this.limit.rendu)
+      .getAssignmentsRendu(this.search,this.page.rendu, this.limit.rendu)
       .subscribe((data) => {
         console.log("données reçues dans les assigments pour scrolling");
 
@@ -160,7 +161,7 @@ export class AssignmentsComponent implements OnInit {
   }
   getPlusDAssignmentsNonPourScrolling() {
     this.assignmentsService
-      .getAssignmentsNonRendu(this.page.nonrendu, this.limit.nonrendu)
+      .getAssignmentsNonRendu(this.search,this.page.nonrendu, this.limit.nonrendu)
       .subscribe((data) => {
         console.log("données reçues dans les assigments pour scrolling");
 
@@ -302,7 +303,12 @@ export class AssignmentsComponent implements OnInit {
   //     },
   //   });
   // }
-
+  searchs(event) {
+   console.log(this.search);
+   
+   this.getAssignmentsRendu();
+   this.getAssignmentsNonRendu();
+  }
 
 
   drop(event: CdkDragDrop<string[]>) {
