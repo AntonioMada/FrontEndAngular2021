@@ -2,8 +2,8 @@
 Application pour la gestion d'assignments
 
 # Membres du groupes
-RANDRIANAVONY Harentsoa Antonio 42
-Zakanirina Ny Aina Herimanana 59
+- RANDRIANAVONY Harentsoa Antonio 42
+- Zakanirina Ny Aina Herimanana 59
 
 # Installation
 1-  Cloner le git avec la commande : 
