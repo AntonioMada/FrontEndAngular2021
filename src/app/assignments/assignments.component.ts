@@ -115,10 +115,8 @@ export class AssignmentsComponent implements OnInit {
         this.hasPrevPage.rendu = data.hasPrevPage;
         this.prevPage.rendu = data.prevPage;
         this.hasNextPage.rendu = data.hasNextPage;
-        console.log("Check if données rendues reçues has next page:"+data.hasNextPage);
-        console.log("Check if this has next page:"+ this.hasNextPage.rendu);
         this.nextPage.rendu = data.nextPage;
-        console.log(data.docs);
+        console.log(data);
         console.log("données rendues reçues");
       });
   }
@@ -128,7 +126,6 @@ export class AssignmentsComponent implements OnInit {
       .getAssignmentsNonRendu(this.search,this.page, this.limit)
       .subscribe((data) => {
         this.noAssignmentsNonRendu = data.docs.length == 0 ? true : false; 
-        console.log("Rendu Status : "+this.noAssignmentsNonRendu);
         this.assignmentsnonrendu = data.docs;
         this.page.nonrendu = data.page;
         this.limit.nonrendu = data.limit;
@@ -275,8 +272,8 @@ export class AssignmentsComponent implements OnInit {
   searchs(event) {
    console.log(this.search);
    
-   this.getAssignmentsRendu();
    this.getAssignmentsNonRendu();
+   this.getAssignmentsRendu();
   }
 
 
