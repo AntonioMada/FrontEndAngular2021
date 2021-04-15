@@ -20,8 +20,8 @@ export class MatieresService {
   ) {}
 
   
-  uri = "http://localhost:8010/api/matieres"
-  // uri = "https://backend2021.herokuapp.com/api/matieres"
+  // uri = "http://localhost:8010/api/matieres"
+  uri = "https://backend2021.herokuapp.com/api/matieres"
 
 
   getMatieres(): Observable<Matiere[]> {
