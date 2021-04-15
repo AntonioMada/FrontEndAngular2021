@@ -17,6 +17,11 @@ Application pour la gestion d'assignments
 
 4- Lance l'application avec :
 - $ ng serve
+- Pour lancer l'application avec le serveur local, il faut changer les uri dans
+- - /src/app/shared/assignments.service.ts
+- - /src/app/shared/login.service.ts
+- - /src/app/shared/matieres.service.ts
+en localhost
 
 # Fonctionnalités
 ## Login
