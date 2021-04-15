@@ -8,7 +8,7 @@
         </mat-list-item>
       </mat-list>
 
-  <form ngForm  #formDialogue class="form" (submit)="submit(data.assigns); ">
+  <form ngForm  #formDialogue class="form"  >
    
     <mat-form-field *ngIf="data.assigns.rendu==false" appearance="fill">
         <mat-label>Nouveau note</mat-label>
@@ -17,7 +17,7 @@
         </mat-select>
     </mat-form-field>
     <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()" cdkFocusInitial>exit</button>
-        <button mat-button type="submit"> Change</button>
+        <button mat-button (click)="onNoClick()">exit</button>
+        <button mat-button (click)="submit(data.assigns)"> Change</button>
     </div>
 </form>
