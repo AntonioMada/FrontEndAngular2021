@@ -48,6 +48,7 @@ export class AppComponent {
     this.router.navigate(["/login"])
     }else{
       this.loginService.check().subscribe((reponse) => {
+        console.log(reponse);
         alert(reponse.name+"  "+reponse.email);
       });}
   }

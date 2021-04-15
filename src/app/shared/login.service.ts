@@ -9,10 +9,10 @@ export class LoginService {
 
   constructor(private http:HttpClient) {}
 
-  // uri = "http://localhost:8010/api/users";
-  // uritoken = "https://localhost.8010/api/users/check";
-  uri = "https://backend2021.herokuapp.com/api/users";
-  uritoken = "https://backend2021.herokuapp.com/api/users/check";
+  uri = "http://localhost:8010/api/users";
+  uritoken = "http://localhost:8010/api/users/check";
+  // uri = "https://backend2021.herokuapp.com/api/users";
+  // uritoken = "https://backend2021.herokuapp.com/api/users/check";
  
   login(login,mdp): Observable<boolean>{
    // console.log(login+"  "+mdp)
@@ -26,15 +26,14 @@ export class LoginService {
       })
     );
   }
+
   check():Observable<any>{
     const body = { 'token': localStorage.getItem('token') };
     console.log(body);
     
     return this.http.post(this.uritoken, body);
-     
   }
+
   logOut() {
   }
-
-
 }
